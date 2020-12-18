@@ -5,14 +5,14 @@
         <ProjectList />
       </v-flex>
       <v-flex md7>
-        <h1> This is the Snotel Project </h1>
+        <h1> This is the NMT Project </h1>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 <script>
 
-import ProjectList from '../../ProjectList'
+import ProjectList from '../../../ProjectList'
 
 export default {
     components:{

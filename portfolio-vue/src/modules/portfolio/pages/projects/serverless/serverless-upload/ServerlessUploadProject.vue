@@ -5,7 +5,7 @@
         <ProjectList />
       </v-flex>
       <v-flex md7>
-        <h1> This is the Serverless data processing  </h1>
+        <h1> This is the Serverless Upload Project </h1>
       </v-flex>
     </v-layout>
   </v-container>

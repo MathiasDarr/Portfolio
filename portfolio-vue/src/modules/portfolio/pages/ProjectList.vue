@@ -60,19 +60,22 @@ export default {
             items: [
                 { title: 'Snotel Pipeline', icon: 'mdi-view-dashboard', route:'/portfolio/snotel' },
                 { title: 'Serverless Ecommerce Application', icon: 'mdi-view-dashboard', route:'/portfolio/serverless/ecommerce'},
+                
+                {title: 'Serverless Upload Application' ,route :'/portfolio/serverless/upload'},
+                { title: 'Serverless Data Processing Applications', icon: 'mdi-view-dashboard', route:'/portfolio/serverless/data-processing' },
                 { title: 'Spring RideShare Microservices', icon: 'mdi-image', route:'/portfolio/microservices/rideshare' },
 // { title: 'Serverless Upload Application', icon: 'mdi-image', route:'/portfolio/upload' },
-                
-
+              
                 { title: 'Spring HealthCare Microservices', icon: 'mdi-image', route:'/portfolio/microservices/healthcare' },
 
                 // { title: 'Spring ECommerce Microservices', icon: 'mdi-image', route:'/portfolio/spring-ecom' },
                 // { title: 'Serverless Data Processing Applications', icon: 'mdi-view-dashboard', route:'/portfolio/serverless-data' },
-                // { title: 'Music Information Retrieval', icon: 'mdi-view-dashboard', route:'/portfolio/mir' },
-                // { title: 'Twitter Pipeline', icon: 'mdi-view-dashboard', route:'/portfolio/twitter/pipeline' },
-                // { title: 'Twitter ElasticSearch API', icon: 'mdi-view-dashboard', route:'/portfolio/twitter/query-api' },
+                { title: 'Twitter Pipeline', icon: 'mdi-view-dashboard', route:'/portfolio/twitter/pipeline' },
+                { title: 'Twitter ElasticSearch API', icon: 'mdi-view-dashboard', route:'/portfolio/twitter/query-api' },
 
-                // { title: 'Neural Machine Translation', icon: 'mdi-view-dashboard', route:'/portfolio/nmt' },
+                { title: 'Music Information Retrieval', icon: '', route: '/portfolio/deep-learning/mir'} ,
+
+                { title: 'Neural Machine Translation', icon: 'mdi-view-dashboard', route:'/portfolio/deep-learning/nmt' },
           ],
         }
     }
