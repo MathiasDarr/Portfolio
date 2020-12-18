@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <nav>
-    <div>
-    </div>
+      <div>
+        </div>
 
       <v-toolbar flat dark class="py-0 mt">
         
@@ -14,7 +14,7 @@
           <v-spacer></v-spacer>
       
       <v-toolbar-items class = "hidden-xs-only">
-        <v-btn  v-for="item in menuItems" :key="item.title" @click="selectRoute(item.route)" class ="grey--text" >
+        <v-btn  v-for="item in menuItems" :key="item.title" @click="navigate(item.route)" class ="grey--text" >
         <!-- <v-btn  v-for="item in menuItems" :key="item.title" :to= "item.route" class ="grey--text" > -->
           <v-icon left >
           </v-icon>
@@ -33,12 +33,42 @@
 
 <script>
 
+import moduleA from './modules/moduleA/module'
+import router from './services/router'
+
 
 export default {
   name: 'App',
 
   components: {
 
+  },
+
+  methods:{
+
+		loadModuleA () {
+				this.$store.dispatch('system/initializeModule', moduleA)
+		},
+
+    loadPortfolioModule(){
+      console.log("loading portfolio")
+    },
+
+    navigate(route){
+      if(route != this.$route.path){
+        
+        if(route == '/blog'){
+          this.loadModuleA()
+        }
+
+        if(route=='/portfolio'){
+          this.loadPortfolioModule()
+        }
+
+        router.push(route)
+      }
+          
+    }
   },
 
   data(){
