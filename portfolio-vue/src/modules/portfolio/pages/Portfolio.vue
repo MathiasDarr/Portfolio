@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex md3>
+      <v-flex md4>
         <ProjectList />
       </v-flex>
-      <v-flex md7>
+      <v-flex md5>
         <h1> This is the portfolio </h1>
       </v-flex>
     </v-layout>
