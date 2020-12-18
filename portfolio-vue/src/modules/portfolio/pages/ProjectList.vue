@@ -305,11 +305,11 @@ export default {
 
           pipeline_projects: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline'],], 
 
-          categories: [{title:'Data Pipelines', icon: 'mdi-database-arrow-down-outline', admins: [['Snotel', 'mdi-snowflake'], ['Twitter', 'mdi-twitter'],], },
+          categories: [{title:'Data Pipelines', icon: 'mdi-database-arrow-down-outline', admins: [['USDA Snowpack Pipeline', 'mdi-snowflake'], ['Twitter Streaming Pipeline', 'mdi-twitter'],], },
           {title:'Serverless Applications',  icon: 'mdi-lambda', admins: [['Serverless ECommerce ', 'mdi-cart'], ['Serverless Upload API', 'mdi-cloud-upload-outline'], ['Serverless Data Processing ', 'mdi-database-export-outline']], },
           {title: 'MicroServices', icon: 'mdi-cloud-outline', admins: [['RideShare Microservices', 'mdi-kubernetes'], ['Ecommerce Microservices', 'mdi-cart'], ['Health Care Scheduling Services', 'mdi-heart-outline'],], },
-          {title : 'Deep Learning', icon: 'mdi-lan', admins: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline'],], },
-          {title: 'Analytics', icon: 'mdi-data-matrix', admins: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline'],], },
+          {title : 'Deep Learning', icon: 'mdi-lan', admins: [['Music Information Retrieval', 'mdi-music'], ['Neural Machine Translation', 'mdi-translate'],], },
+          {title: 'Analytics', icon: 'mdi-data-matrix', admins: [['Twitter NLP', 'mdi-twitter']], },
           
           ],
 
