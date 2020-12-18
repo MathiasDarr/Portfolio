@@ -2,7 +2,7 @@
   <v-container>
     <v-layout>
       <v-flex md2>
-        <BaseNavBar v-bind:items=items />
+        <BaseNavBar -bind:items=items />v
       </v-flex>
           
       <v-flex md10>
