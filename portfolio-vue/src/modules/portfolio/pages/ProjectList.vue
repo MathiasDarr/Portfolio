@@ -59,9 +59,13 @@ export default {
         return {
             items: [
                 { title: 'Snotel Pipeline', icon: 'mdi-view-dashboard', route:'/portfolio/snotel' },
-                { title: 'Serverless Ecommerce Application', icon: 'mdi-view-dashboard', route:'/portfolio/sam-ecommerce' },
-                // { title: 'Serverless Upload Application', icon: 'mdi-image', route:'/portfolio/upload' },
-                // { title: 'Spring RideShare Microservices', icon: 'mdi-image', route:'/portfolio/rideshare' },
+                { title: 'Serverless Ecommerce Application', icon: 'mdi-view-dashboard', route:'/portfolio/serverless/ecommerce'},
+                { title: 'Spring RideShare Microservices', icon: 'mdi-image', route:'/portfolio/microservices/rideshare' },
+// { title: 'Serverless Upload Application', icon: 'mdi-image', route:'/portfolio/upload' },
+                
+
+                { title: 'Spring HealthCare Microservices', icon: 'mdi-image', route:'/portfolio/microservices/healthcare' },
+
                 // { title: 'Spring ECommerce Microservices', icon: 'mdi-image', route:'/portfolio/spring-ecom' },
                 // { title: 'Serverless Data Processing Applications', icon: 'mdi-view-dashboard', route:'/portfolio/serverless-data' },
                 // { title: 'Music Information Retrieval', icon: 'mdi-view-dashboard', route:'/portfolio/mir' },
