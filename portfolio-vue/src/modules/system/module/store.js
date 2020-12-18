@@ -1,6 +1,8 @@
 import Store from '../../../services/store'
 import Router from '../../../services/router'
 import siteModule from '../../site/module'
+import blogModule from '../../blog/module'
+
 
 export default {
 	namespaced: true,
@@ -12,6 +14,11 @@ export default {
 	mutations: {},
 	
 	actions: {
+		initializeBlogModule({dispatch}){
+			console.log("BLOG INITIALIZING")
+			dispatch('initializeBlogModule', blogModule)
+		},
+		
 		initialize ({ dispatch }) {
 			console.info('System initializing...')
 			console.info('System initialized.')

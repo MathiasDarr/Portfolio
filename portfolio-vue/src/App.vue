@@ -34,6 +34,7 @@
 <script>
 
 import moduleA from './modules/moduleA/module'
+import Blog from './modules/blog/module'
 import router from './services/router'
 
 
@@ -46,9 +47,16 @@ export default {
 
   methods:{
 
+    loadBlogModule(){
+      this.$store.dispatch('/system/initializeModule', Blog)
+    },
+
 		loadModuleA () {
 				this.$store.dispatch('system/initializeModule', moduleA)
 		},
+
+
+
 
     loadPortfolioModule(){
       console.log("loading portfolio")
@@ -62,7 +70,7 @@ export default {
         }
 
         if(route=='/portfolio'){
-          this.loadPortfolioModule()
+          this.loadModuleA()
         }
 
         router.push(route)

@@ -6,12 +6,17 @@ import App from './App.vue'
 import cognitoAuth from './cognito'
 
 import system from './modules/system/module'
+import blog from './modules/blog/module'
 
 /* Initialize System Module */
 Store.registerModule('system', system.store)
 Router.addRoutes(system.routes)
 Store.dispatch('system/initialize', null, { root: true })
 
+
+Store.registerModule('system', blog.store)
+Router.addRoutes(blog.routes)
+Store.dispatch('system/initialize', null, { root: true })
 
 
 Vue.config.productionTip = false
