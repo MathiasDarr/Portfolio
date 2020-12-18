@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-
 import Store from '../../../services/store'
 import Router from '../../../services/router'
 import siteModule from '../../site/module'
@@ -14,20 +13,15 @@ export default {
 	getters: {},
 	mutations: {},
 	actions: {
-
-		
 		initialize ({ dispatch }) {
 			console.info('System initializing...')
 			console.info('System initialized.')
 			dispatch('initializeModule', siteModule)
 		},
 		initializeModule ({ dispatch }, module) {
-
-			console.log(module.name)
-			
-			// Store.registerModule(module.name, module.store)
-			// Router.addRoutes(module.routes)
-			// dispatch(module.name + '/initialize', null, { root: true })
+			Store.registerModule(module.name, module.store)
+			Router.addRoutes(module.routes)
+			dispatch(module.name + '/initialize', null, { root: true })
 		}
 	}
 }

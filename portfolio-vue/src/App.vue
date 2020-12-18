@@ -14,7 +14,7 @@
           <v-spacer></v-spacer>
       
       <v-toolbar-items class = "hidden-xs-only">
-        <v-btn  v-for="item in menuItems" :key="item.title" @click="navigate(item.route)" class ="grey--text" >
+        <v-btn  v-for="item in menuItems" :key="item.title" @click="navigate(item.route, item.name, item.module_)" class ="grey--text" >
         <!-- <v-btn  v-for="item in menuItems" :key="item.title" :to= "item.route" class ="grey--text" > -->
           <v-icon left >
           </v-icon>
@@ -32,10 +32,12 @@
 </template>
 
 <script>
+/* eslint-disable */
 
 import portfolio from './modules/portfolio/module'
 import blog from './modules/blog/module'
 import router from './services/router'
+import module from './modules/portfolio/module';
 
 
 export default {
@@ -51,27 +53,26 @@ export default {
       this.$store.dispatch('system/initializeModule', blog)
     },
 
-		loadModuleA () {
+		loadPortfolioModule () {
 				this.$store.dispatch('system/initializeModule', portfolio)
 		},
 
-
-
-
-    loadPortfolioModule(){
-      console.log("loading portfolio")
-    },
-
-    navigate(route){
-      if(route != this.$route.path){
+    check_module(children, module_name, module_){
+        if(module_name == 'landing'){
+          return
+        }
         
-        if(route == '/blog'){
-          this.loadBlogModule()
+        if(children[module_name] == null){
+            this.$store.dispatch('system/initializeModule', module_)
+          }else{
+            console.log("YES")
         }
-
-        if(route=='/portfolio'){
-          this.loadModuleA()
-        }
+    },
+    navigate(route, name, module_){
+      if(route != this.$route.path){
+                
+        var children = this.$store._modules.root._children
+        this.check_module(children, name, module_)
 
         router.push(route)
       }
@@ -83,9 +84,9 @@ export default {
     return {
         drawer: false,
         menuItems:[
-          {title:'Landing', route:'/' }, 
-          {title: 'Blog', route: '/blog'},
-          {title:'Portfolio', route:'/portfolio' },
+          {title:'Landing', route:'/', name:'landing', module_: null }, 
+          {title: 'Blog', route: '/blog', name:'blog', module_:blog},
+          {title:'Portfolio', route:'/portfolio', name:'portfolio', module_: portfolio },
 
         ],
 

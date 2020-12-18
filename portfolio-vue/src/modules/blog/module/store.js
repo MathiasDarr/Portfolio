@@ -8,7 +8,7 @@ export default {
 	actions: {
 		initialize ({ commit }) {
 			console.info('Blog initializing...')
-			console.info('Blog initialized.')
+			console.info('Blog initialized...')
 		}
 	}
 }
