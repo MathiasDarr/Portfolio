@@ -21,13 +21,28 @@
       <v-list-group
         :value="false"
         :prepend-icon="item.icon"
-        v-for="item in categories" :key="item.title"
-      >
-        <template v-slot:activator>
-          <v-list-item-title>{{item.title}}</v-list-item-title>
-        </template>
+        v-for="item in categories" :key="item.title">
+          <template v-slot:activator>
+            <v-list-item-title>{{item.title}}</v-list-item-title>
+          </template>
+          
+          <v-list-group
+            :value="false"
+            :prepend-icon="project[1]"
+            sub-group
+            v-for="project in item.admins"
+            :key="project[0]">
 
-        <v-list-group
+            <template v-slot:activator>
+              <v-list-item-title>{{project[0]}}</v-list-item-title>
+            </template>
+
+      </v-list-group>
+      </v-list-group>
+
+
+
+        <!-- <v-list-group
           no-action
           sub-group
         >
@@ -36,11 +51,9 @@
               <v-list-item-title>Actions</v-list-item-title>
             </v-list-item-content>
           </template>
+        </v-list-group> -->
 
-        </v-list-group>
-
-      </v-list-group>
-
+      
     </v-list>
     <!-- <v-list>
       <v-list-item  v-for="item in categories" :key="item.title" link >
