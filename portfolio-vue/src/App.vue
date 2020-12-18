@@ -48,7 +48,7 @@ export default {
   methods:{
 
     loadBlogModule(){
-      this.$store.dispatch('/system/initializeModule', blog)
+      this.$store.dispatch('system/initializeModule', blog)
     },
 
 		loadModuleA () {
@@ -66,7 +66,7 @@ export default {
       if(route != this.$route.path){
         
         if(route == '/blog'){
-          this.loadModuleA()
+          this.loadBlogModule()
         }
 
         if(route=='/portfolio'){
@@ -85,7 +85,7 @@ export default {
         menuItems:[
           {title:'Landing', route:'/' }, 
           {title: 'Blog', route: '/blog'},
-          {title:'Portfolio', route:'/portfolio/' },
+          {title:'Portfolio', route:'/portfolio' },
 
         ],
 
