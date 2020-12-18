@@ -33,8 +33,8 @@
 
 <script>
 
-import moduleA from './modules/moduleA/module'
-import Blog from './modules/blog/module'
+import portfolio from './modules/portfolio/module'
+import blog from './modules/blog/module'
 import router from './services/router'
 
 
@@ -48,11 +48,11 @@ export default {
   methods:{
 
     loadBlogModule(){
-      this.$store.dispatch('/system/initializeModule', Blog)
+      this.$store.dispatch('/system/initializeModule', blog)
     },
 
 		loadModuleA () {
-				this.$store.dispatch('system/initializeModule', moduleA)
+				this.$store.dispatch('system/initializeModule', portfolio)
 		},
 
 

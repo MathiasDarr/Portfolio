@@ -6,9 +6,9 @@ export default {
 	getters: {},
 	mutations: {},
 	actions: {
-		initialize_blog ({ commit }) {
-			console.info('Portfolio initializing...')
-			console.info('Portfolio initialized.')
+		initialize ({ commit }) {
+			console.info('Blog initializing...')
+			console.info('Blog initialized.')
 		}
 	}
 }

@@ -7,8 +7,8 @@ export default {
 	mutations: {},
 	actions: {
 		initialize ({ commit }) {
-			console.info('ModuleA initializing...')
-			console.info('ModuleA initialized.')
+			console.info('Portfolio initializing...')
+			console.info('Portfolio initialized.')
 		}
 	}
 }

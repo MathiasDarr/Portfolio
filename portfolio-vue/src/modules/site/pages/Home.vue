@@ -11,11 +11,11 @@
 	</div>
 </template>
 <script>
-	import moduleA from '../../moduleA/module'
+
 	export default {
 		methods: {
 			loadModuleA () {
-				this.$store.dispatch('system/initializeModule', moduleA)
+
 			}
 		}
 	}
