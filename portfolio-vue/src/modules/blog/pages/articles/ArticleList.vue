@@ -8,11 +8,13 @@
         color="primary"
       >
         <v-list-item
-          v-for="(item, i) in articles"
-          :key="i"
+          v-for="item in articles"
+          @click="navigate(item.article_id)"
+          :key="item.article_id"
         >
 
-        <Article :title="item.title" />
+        <ArticleCard :title="item.title"/>
+        {{item.article_id}}
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -30,21 +32,27 @@
 <script>
 /* eslint-disable */
 
-import Article from './Article'
+import ArticleCard from './ArticleCard'
 import axios from 'axios';
 import { mapGetters, mapActions } from "vuex";
-
+import router from '../../../../services/router'
 
 export default {
     created(){
       this.await_articles()
     },
     components:{
-        Article
+        ArticleCard
     },
     methods:{
-      // ...mapActions(["setArticles"]),
-        async fetch_articles(){
+      ...mapActions(["setArticles"]),
+
+      navigate(article_id){
+        console.log(article_id)
+        router.push({name:'article', params:{article_id:article_id}})
+      },
+
+      async fetch_articles(){
             try{
                 //var url = window.__runtime_configuration.apiEndpoint + '/categories'
                 var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles'
