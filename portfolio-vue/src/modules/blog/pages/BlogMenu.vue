@@ -39,10 +39,17 @@
             </template>
 
       </v-list-group>
-      </v-list-group>
 
+
+      </v-list-group>
+      <v-list-item>
+        
+        <v-btn color="primary" @click="navigate_to_route_name('post_article')"> Post New Article </v-btn>
+        </v-list-item>
       
     </v-list>
+    
+
 
 
   </v-card>
@@ -61,6 +68,10 @@ export default {
   },
 
   methods:{
+
+    navigate_to_route_name(route_name){
+      router.push({name:route_name})
+    },
     navigate(route){
       if(route != this.$route.path){
         router.push(route)
