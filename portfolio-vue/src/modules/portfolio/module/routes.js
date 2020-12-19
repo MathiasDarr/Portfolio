@@ -3,6 +3,8 @@ import SnotelProject from '../pages/projects/snotel/SnotelProject'
 
 import RideShareServicesProject from '../pages/projects/microservices/rideshare-services/RideShareServicesProject'
 import HealthCareServicesProject from '../pages/projects/microservices/healthcare-services/HealthCareServicesProject'
+import EComServicesProject from '../pages/projects/microservices/ecomm-services/EComServicesProject'
+
 
 import SamECommProject from '../pages/projects/serverless/sam-ecommerce/SamECommProject'
 import ServerlessDataProject from '../pages/projects/serverless/data-applications/ServerlessDataProject'
@@ -15,6 +17,7 @@ import TwitterQueryApiProject from '../pages/projects/twitter/query-api/TwitterQ
 import MirProject from '../pages/projects/deep-learning/mir/MirProject'
 import NmtProject from '../pages/projects/deep-learning/nmt/NmtProject'
 
+import TwitterNlpProject from '../pages/projects/analytics/TwitterNLP/TwitterNlpProject'
 
 
 export default [
@@ -25,6 +28,8 @@ export default [
 
 	{ path: '/portfolio/microservices/rideshare', component: RideShareServicesProject },
 	{ path: '/portfolio/microservices/healthcare', component: HealthCareServicesProject},
+	{ path: '/portfolio/microservices/ecomm', component: EComServicesProject},
+
 
 	{ path: '/portfolio/serverless/ecommerce', component: SamECommProject },
 	{ path: '/portfolio/serverless/data-processing', component: ServerlessDataProject},
@@ -34,7 +39,9 @@ export default [
 	{path: '/portfolio/twitter/query-api', component: TwitterQueryApiProject},
 
 	{path: '/portfolio/deep-learning/mir', component: MirProject},
-	{path: '/portfolio/deep-learning/nmt', component: NmtProject}
+	{path: '/portfolio/deep-learning/nmt', component: NmtProject},
+
+	{path: '/portfolio/analytics/twitternlp', component: TwitterNlpProject}
 
 
 ]
