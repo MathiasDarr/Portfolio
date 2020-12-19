@@ -9,12 +9,13 @@ import boto3
 import csv
 import os
 from time import sleep
+import uuid
 
 
 def insert_article(article):
     return table.put_item(
         Item={
-            'article_id': article['article_id'],
+            'article_id': str(uuid.uuid4()),
             'title': article['title'],
             'category': article['category'],
 
@@ -55,8 +56,8 @@ def create_articles_table():
 if __name__ == '__main__':
     # dynamodb = boto3.resource('dynamodb',endpoint_url="http://localhost:4566")
     dynamodb = boto3.resource('dynamodb') #, endpoint_url="http://localhost:8000")
-    # create_articles_table()
-    # sleep(15)
+    create_articles_table()
+    sleep(15)
     table = dynamodb.Table('Articles')
 
     with open('data/articles.csv', newline='') as csvfile:
