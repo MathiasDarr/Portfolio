@@ -28,24 +28,54 @@
 </template>
 
 <script>
+/* eslint-disable */
 
 import Article from './Article'
+import axios from 'axios';
+import { mapGetters, mapActions } from "vuex";
 
 
 export default {
+    created(){
+      this.await_articles()
+    },
     components:{
         Article
     },
+    methods:{
+      // ...mapActions(["setArticles"]),
+        async fetch_articles(){
+            try{
+                //var url = window.__runtime_configuration.apiEndpoint + '/categories'
+                var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles'
+                const response = await axios.get(url)            
+                var response_articles = JSON.parse(response.data.body)
+                // this.setArticles(response_articles.articles)
+                console.log(response_articles.articles)
+                this.articles = response_articles.articles
+            }catch(err){
+                console.log(err)
+            }
+        },
 
+        async await_articles(){
+            await this.fetch_articles()
+            // this.articles = this.getArticles
+        },
+
+
+    
+    },
+    computed: {
+      // ...mapGetters(["getArticles"]),
+    },
     data(){
         return {
-          articles: [{ title: 'Spark ML Pipelines'},
-                         {title: 'Spring Integration Tests'},
-                         {title: 'S3 Presigned Post URLs'},
-                        
-                         ]
-
-
+          articles: []
+          // articles: [{ title: 'Spark ML Pipelines'},
+          //                {title: 'Spring Integration Tests'},
+          //                {title: 'S3 Presigned Post URLs'},
+          //                ]
         }
     }
 

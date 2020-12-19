@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  query-ap
+  Sample SAM Template for query-api
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+
+Parameters:
+  DynamoEndpoint:
+    Type: String
+    Default: cloud
+    AllowedValues:
+      - http://dynamo-local:8000
+      - cloud
+    Description: http://dynamo-local:8000, cloud
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  ArticlesApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Name: ArticlesApi
+      DefinitionUri: ./swagger.yaml
+
+  ArticlesScanFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: ArticlesScanFunction
+      CodeUri: handlers/scan_articles/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: Articles
+      Events:
+        ProductsQuery:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref ArticlesApi
+            Path: /articles
+            Method: get
+
+
+Outputs:
+  ArticlesApi:
+    Value: !Sub "https://${ArticlesApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+    Export:
+      Name: !Join [ ':', [ !Ref 'AWS::StackName', 'ArticlesApi' ] ]
+
