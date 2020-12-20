@@ -2,7 +2,7 @@
   <v-container>
       <v-layout>
           <v-flex md4>
-              <AbstractMenu :menu_items="menu_items"/>
+              <AbstractMenu :menu_items="menu_items" :menu_title="menu_title"/>
           </v-flex>
           <v-flex md6>
 
@@ -22,16 +22,15 @@ export default {
     },
     data(){
         return {
+            menu_title: "Abstract Menu",
             menu_items: [
-                    {title:'Data Pipelines', icon: 'mdi-database-arrow-down-outline', 
                     
-                    admins: [['USDA Snowpack Pipeline', 'mdi-snowflake', '/portfolio/snotel'],
-                            ['Twitter Streaming Pipeline', 'mdi-twitter', '/portfolio/twitter/pipeline'],], },
-                    
-                    {title:'Serverless Applications',  icon: 'mdi-lambda', 
-                    admins: [['Serverless ECommerce ', 'mdi-cart', '/portfolio/serverless/ecommerce'],
-                        ['Serverless Upload API', 'mdi-cloud-upload-outline', '/portfolio/serverless/upload'], 
-                        ['Serverless Data Processing ', 'mdi-database-export-outline', '/portfolio/serverless/data-processing']], }
+                    {title:'Menu Item 2',  icon: 'mdi-lambda', 
+                    admins: [
+                        {title:'SubMenu Item 1', icon:'mdi-database-export-outline', route:'landing'},
+                        {title:'SubMenu Item 2', icon:'mdi-music', route:'abstract'},
+                    ]
+                }
             ],
         }
     }

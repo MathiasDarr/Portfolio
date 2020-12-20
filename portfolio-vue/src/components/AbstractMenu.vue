@@ -9,7 +9,7 @@
         <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
-            <h4> Menu Items </h4>
+            <h4> {{ menu_title }} </h4>
           </v-list-item-title>
           <v-list-item-subtitle>
             
@@ -27,14 +27,14 @@
           
           <v-list-group
             :value="false"
-            :prepend-icon="project[1]"
+            :prepend-icon="project.icon"
             sub-group
             v-for="project in item.admins"
-            @click="navigate(project[2])"
-            :key="project[0]">
+            @click="navigate_to_route_name(project.route)"
+            :key="project.title">
 
             <template v-slot:activator>
-              <v-list-item-title>{{project[0]}}</v-list-item-title>
+              <v-list-item-title>{{project.title}}</v-list-item-title>
             </template>
 
         </v-list-group>
@@ -59,7 +59,8 @@ export default {
 
     },
     props: {
-        menu_items: Array
+        menu_items: Array,
+        menu_title: String
     },
 
 
