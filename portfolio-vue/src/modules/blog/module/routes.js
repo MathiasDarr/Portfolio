@@ -1,7 +1,7 @@
 
 import Blog from '../pages/Blog'
 import Article from '../pages/articles/Article'
-import PostArticle from '../pages/PostArticle'
+import PostArticle from '../pages/post/PostArticle'
 
 
 export default [
