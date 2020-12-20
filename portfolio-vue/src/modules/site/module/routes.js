@@ -6,8 +6,11 @@ import Contact from '../pages/Contact.vue'
 import FAQ from '../pages/FAQ.vue'
 import Landing from '../pages/Landing'
 
+
+import AbstractArticle from '../../../components/AbstractArticle'
+
 export default [
 	{ path: '', component: Landing },
-	{ path: '/contact', component: Contact },
+	{ path: '/abstract', component: AbstractArticle },
 	{ path: '/faq', component: FAQ }
 ]

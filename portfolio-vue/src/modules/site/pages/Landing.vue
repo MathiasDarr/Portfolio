@@ -45,11 +45,14 @@
 <script>
 
 import { mapGetters } from "vuex";
-import Paragraph from '../../../components/shared/Paragraph'
+// import Paragraph from '../../../components/shared/Paragraph'
 
 // import axios from 'axios';
 // import * as  AmazonCognitoIdentity from "amazon-cognito-identity-js";
 // import { CognitoAuth } from 'amazon-cognito-auth-js'
+
+import Paragraph from '../../../components/Paragraph'
+
 export default {
   
   components:{
