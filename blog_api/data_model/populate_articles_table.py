@@ -18,7 +18,7 @@ def insert_article(article):
             'article_id': str(uuid.uuid4()),
             'title': article['title'],
             'category': article['category'],
-
+            'article_date':article['article_date']
         }
     )
 
@@ -35,11 +35,21 @@ def create_articles_table():
                     "AttributeType": "S"
                 },
 
+                {
+                    "AttributeName": "article_date",
+                    "AttributeType": "S"
+                },
+
             ],
             KeySchema=[
                 {
                     "AttributeName": "article_id",
                     "KeyType": "HASH"
+                },
+
+                {
+                    "AttributeName": "article_date",
+                    "KeyType": "RANGE"
                 },
 
             ],
