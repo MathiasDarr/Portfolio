@@ -5,38 +5,58 @@
         <PostArticleMenu />
       </v-flex>
       <v-flex md8>
-        <h1> Post Article  dfdf </h1>
+        
+
+      <v-container>
+      
+        <v-row>
+          <v-col cols="12" sm="8">
+        
+          <h1> Post Article  dfdf </h1>
+
+          </v-col>
+
+
+          <v-col cols="12" sm="4"
+            >
+              <v-btn color="primary" @click="LoadArticle()">Load Article </v-btn>
+            </v-col>
+
+          </v-row>
+
+
+        </v-container>
 
 
         <v-card>
-            <div>
-                
-                  <v-form>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="12"
-        >
-          <v-text-field
-            label="Article Title"
-            value=""
-            v-model="title"
-            hint="For example, flowers or used cars"
-          ></v-text-field>
-        </v-col>
+          <div>
+            
+            <v-form>
+              <v-container>
+                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="12"
+                    >
+                <v-text-field
+                 label="Article Title"
+                 value=""
+                 v-model="title"
+                 ></v-text-field>
+              </v-col>
+            </v-row>
 
 
-      </v-row>
+          </v-container>
+  
 
 
-    </v-container>
-  </v-form>
+  
+        </v-form>
                 
                 
-                
-                
-                <editor-menu-bar :editor="editor" v-slot="{commands, isActive}"> 
+                            
+                <!-- <editor-menu-bar :editor="editor" v-slot="{commands, isActive}"> 
                     <div class ="menubar">
                         <button 
                         class="menubar__button"
@@ -47,13 +67,37 @@
                         > Underline </button>
                     </div>
 
-                </editor-menu-bar>
+                </editor-menu-bar> -->
                 <editor-content class="editor__content" :editor="editor"/>
             </div>
         </v-card>
 
-        <v-btn color="primary" @click="PostArticle()">Post Article </v-btn>
-      </v-flex>
+    <v-container>
+      
+      <v-row>
+        <v-col
+          cols="12"
+          sm="3"
+        >
+        
+            <v-btn color="primary" @click="SaveArticle()">Save Article </v-btn>
+
+        </v-col>
+
+
+        <v-col
+          cols="12"
+          sm="6"
+        >
+            <v-btn color="primary" @click="PostArticle()">Post Article </v-btn>
+        </v-col>
+
+      </v-row>
+
+
+    </v-container>
+
+    </v-flex>
     </v-layout>
 
 
@@ -79,7 +123,10 @@ export default {
         PostArticle(){
             console.log(this.title)
             // console.log(this.ediotr)
-            // console.log(this.editor.getHTML())
+            console.log(this.editor.getHTML())
+        },
+        LoadArticle(){
+            
         }
     },
 
@@ -105,10 +152,12 @@ export default {
 
             ],
             content: `
-            <h2> 
-                Article Title
-            </h2>
-            This is not in the header
+
+
+
+
+
+            This is where you type your article.
             `  
             })
         }

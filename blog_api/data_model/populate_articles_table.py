@@ -18,9 +18,43 @@ def insert_article(article):
             'article_id': str(uuid.uuid4()),
             'title': article['title'],
             'category': article['category'],
-            'article_date':article['article_date']
+            'article_date': article['article_date']
         }
     )
+
+
+def create_drafts_table():
+    try:
+        resp = dynamodb.create_table(
+
+            TableName="Drafts",
+
+            AttributeDefinitions=[
+                {
+                    "AttributeName": "article_id",
+                    "AttributeType": "S"
+                },
+
+
+            ],
+            KeySchema=[
+                {
+                    "AttributeName": "article_id",
+                    "KeyType": "HASH"
+                },
+
+            ],
+            ProvisionedThroughput={
+                "ReadCapacityUnits": 1,
+                "WriteCapacityUnits": 1
+            },
+        )
+        return resp
+    except Exception as e:
+        print(e)
+
+
+
 
 
 def create_articles_table():
@@ -64,9 +98,9 @@ def create_articles_table():
 
 
 if __name__ == '__main__':
-    # dynamodb = boto3.resource('dynamodb',endpoint_url="http://localhost:4566")
     dynamodb = boto3.resource('dynamodb') #, endpoint_url="http://localhost:8000")
     create_articles_table()
+    create_drafts_table()
     sleep(15)
     table = dynamodb.Table('Articles')
 

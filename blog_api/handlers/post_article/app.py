@@ -13,7 +13,7 @@ if dynamo_endpoint == 'cloud':
 else:
     dynamo_resource = boto3.resource('dynamodb', endpoint_url=dynamo_endpoint)
 
-TABLE_NAME = 'Article'
+TABLE_NAME = 'Articles'
 table = dynamo_resource.Table(TABLE_NAME)
 
 
@@ -25,6 +25,8 @@ def insert_order(article):
             'article_id': article_id,
             'title': article['title'],
             'category': article['category'],
+            'content': article['content'],
+            'article_date': article['article_date']
         }
     )
     return article_id
@@ -54,7 +56,9 @@ def lambda_handler(event, context):
 
     title = event['body']['title']
     category = event['body']['category']
-    article = {'title': title, 'category': category}
+    content = event['body']['content']
+    article_date = event['body']['article_date']
+    article = {'title': title, 'category': category, 'content': content, 'article_date': article_date}
 
     article_id = insert_order(article)
 
