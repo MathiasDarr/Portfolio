@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card height="200" width="800">
+    <v-card height="200" width="1200">
       <v-card-title>
         {{ title }} 
 

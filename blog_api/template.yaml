@@ -82,6 +82,43 @@ Resources:
             Path: /articles/detail/{article_id}/{article_date}
             Method: get
 
+  ArticleUpdateFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: ArticleUpdateFunction
+      CodeUri: handlers/update_article/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: Articles
+      Events:
+        ProductsQuery:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref ArticlesApi
+            Path: /articles/detail/{article_id}/{article_date}
+            Method: put
+
+  DeleteArticleFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: DeleteArticleFunction
+      CodeUri: handlers/delete_article/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: Articles
+      Events:
+        DeleteArticle:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref ArticlesApi
+            Path: /articles/detail/{article_id}/{article_date}
+            Method: delete
+
+
 
 Outputs:
   ArticlesApi:

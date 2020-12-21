@@ -1,5 +1,22 @@
 <template>
   <v-container>
+      <!-- <h1> {{ article_title }} </h1> -->
+      
+    <v-container>
+      
+      <v-row>
+        <v-col cols="12" sm="10">
+            <h1> {{ article_title }} </h1>
+        </v-col>
+
+        <v-col cols="12" sm="2">
+            <v-btn color="primary" @click="delete_article()">Delete Article </v-btn>
+        </v-col>
+      </v-row>
+
+    </v-container>
+      
+      
       <p v-html="content"></p>
 
 
@@ -57,6 +74,25 @@ export default {
             await this.fetch_article_detail()
             // this.articles = this.getArticles
         },
+
+
+      async delete_article(){
+            try{
+                //var url = window.__runtime_configuration.apiEndpoint + '/categories'
+                var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles/detail/'+ this.article_id + '/' + this.article_date
+                const response = await axios.delete(url)            
+                var response_articles = JSON.parse(response.data.body)
+                // this.setArticles(response_articles.articles)
+                console.log(response_articles.articles)
+            }catch(err){
+                console.log(err)
+            }
+        },
+
+        async await_delete_article(){
+            await this.delete_article()
+        },
+
 
     },
 

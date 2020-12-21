@@ -1,9 +1,6 @@
 <template>
  <v-container>
 
-
-   <ArticleDetail />
-
     <v-list shaped>
       <v-subheader>Articles</v-subheader>
       <v-list-item-group
@@ -17,7 +14,6 @@
 
         <ArticleCard :title="item.title" :article_date="item.article_date"/>
         
-        {{item.article_id}}
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>
           </v-list-item-icon>
@@ -75,6 +71,7 @@ export default {
             await this.fetch_articles()
             // this.articles = this.getArticles
         },
+
 
 
     
