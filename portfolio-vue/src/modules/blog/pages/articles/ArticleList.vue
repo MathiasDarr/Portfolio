@@ -12,7 +12,7 @@
           :key="item.article_id"
         >
 
-        <ArticleCard :title="item.title" :article_date="item.article_date"/>
+        <ArticleCard :title="item.title" :article_date="item.article_date" :article_preview="item.preview" :category="item.category" />
         
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>

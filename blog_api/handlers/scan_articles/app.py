@@ -14,7 +14,10 @@ else:
 
 def scan_articles():
     table = dynamo_resource.Table('Articles')
-    scan_results = table.scan()
+    scan_kwargs = {
+        'ProjectionExpression': "article_id, article_date,title, preview, category"
+    }
+    scan_results = table.scan(**scan_kwargs)
     return scan_results['Items']
 
 

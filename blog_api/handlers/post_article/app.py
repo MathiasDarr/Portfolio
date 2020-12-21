@@ -26,6 +26,7 @@ def insert_order(article):
             'title': article['title'],
             'category': article['category'],
             'content': article['content'],
+            'preview': article['preview'],
             'article_date': article['article_date']
         }
     )
@@ -58,7 +59,7 @@ def lambda_handler(event, context):
     category = event['body']['category']
     content = event['body']['content']
     article_date = event['body']['article_date']
-    article = {'title': title, 'category': category, 'content': content, 'article_date': article_date}
+    article = {'title': title, 'category': category, 'content': content, 'article_date': article_date, 'preview':content[:450]}
 
     article_id = insert_order(article)
 
@@ -66,3 +67,4 @@ def lambda_handler(event, context):
         "article": article_id
     }), 'headers': {"Access-Control-Allow-Origin": "*"}}
     return response
+

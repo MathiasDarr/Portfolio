@@ -1,17 +1,16 @@
 <template>
   <v-container>
     <v-layout>
-      <v-flex md4>
+      <v-flex md3>
         <BlogMenu />
       </v-flex>
-      <v-flex md8>
+      <v-flex md9>
         <h1> Dakobed Blog </h1>
         <ArticleList />
       </v-flex>
     </v-layout>
   </v-container>
 </template>
-
 <script>
 
 

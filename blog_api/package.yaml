@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: ArticlesScanFunction
-      CodeUri: s3://dakobed-serverless-apis/bd7102189cdfb7cae0653c82e12cdc74
+      CodeUri: s3://dakobed-serverless-apis/ba2e4c44237eea7b42649299db0fe42f
       Handler: app.lambda_handler
       Runtime: python3.7
       Policies:
@@ -43,7 +43,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: PostArticleFunction
-      CodeUri: s3://dakobed-serverless-apis/e3dd7b7829be184cb734eb366e61b52d
+      CodeUri: s3://dakobed-serverless-apis/d7270b09b733d6812677c6a859297120
       Handler: app.lambda_handler
       Runtime: python3.7
       Policies:
