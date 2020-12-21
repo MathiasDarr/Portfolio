@@ -9,6 +9,4 @@ export default [
 	{ path: '/blog', component: Blog },
 	{ path: '/blog/article/:article_id', component: ArticleDetail, name:'article', props:true },
 	{path: '/blog/article/post', component: PostArticle, name:'post_article'},
-
-
 ]
