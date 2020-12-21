@@ -6,18 +6,19 @@
 
       <Paragraph v-bind:title = "paragraph2_title" v-bind:text = paragraph2 />
 
-      <Gist />
+      <vue-gist-embed :gistId="gistId"></vue-gist-embed>
+
   </v-container>
 </template>
 
 <script>
 
 import Paragraph from '../../../../components/Paragraph'
-import Gist from '../../../../components/Gist'
+import VueGistEmbed from 'vue-gist-embed';
 export default {
     components:{
       Paragraph,
-      Gist
+      VueGistEmbed
     },
     created(){
         console.log("HERLDF")
@@ -41,8 +42,8 @@ export default {
           paragraph3_title : "Spring JPA",
           paragraph3: `Spring Data JPA can be used to interface with a postgres table in the following manner.  In this tutorial we will set up a controller, a service, an entity class and a repository for querying the database.`,
 
-          paragraph_4_title: "Spring Kafka Binder"
-
+          paragraph_4_title: "Spring Kafka Binder",
+          gistId:'d271c02e6fbef12386d260e6f46fcbe4'
 
         }
     }

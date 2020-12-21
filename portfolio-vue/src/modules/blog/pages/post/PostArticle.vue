@@ -10,6 +10,32 @@
 
         <v-card>
             <div>
+                
+                  <v-form>
+    <v-container>
+      <v-row>
+        <v-col
+          cols="12"
+          sm="12"
+        >
+          <v-text-field
+            label="Article Title"
+            value=""
+            v-model="title"
+            hint="For example, flowers or used cars"
+          ></v-text-field>
+        </v-col>
+
+
+      </v-row>
+
+
+    </v-container>
+  </v-form>
+                
+                
+                
+                
                 <editor-menu-bar :editor="editor" v-slot="{commands, isActive}"> 
                     <div class ="menubar">
                         <button 
@@ -26,6 +52,7 @@
             </div>
         </v-card>
 
+        <v-btn color="primary" @click="PostArticle()">Post Article </v-btn>
       </v-flex>
     </v-layout>
 
@@ -48,8 +75,18 @@ export default {
     components:{
         EditorContent, EditorMenuBar, EditorMenuBubble, PostArticleMenu
     },
+    methods:{
+        PostArticle(){
+            console.log(this.title)
+            // console.log(this.ediotr)
+            // console.log(this.editor.getHTML())
+        }
+    },
+
+
     data(){
         return {
+            title: '',
             editor: new Editor({
             extensions:[
                 new Blockquote(),
@@ -69,8 +106,10 @@ export default {
             ],
             content: `
             <h2> 
-                Hi there,
-            </h2>`  
+                Article Title
+            </h2>
+            This is not in the header
+            `  
             })
         }
     }
