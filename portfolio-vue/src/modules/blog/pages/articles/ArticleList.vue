@@ -11,7 +11,7 @@
       >
         <v-list-item
           v-for="item in articles"
-          @click="navigate(item.article_id)"
+          @click="navigate(item.article_id, item.content)"
           :key="item.article_id"
         >
 
@@ -51,9 +51,9 @@ export default {
     methods:{
       ...mapActions(["setArticles"]),
 
-      navigate(article_id){
+      navigate(article_id, article_content){
         console.log(article_id)
-        router.push({name:'article', params:{article_id:article_id, content: '<h1> HELLO </h1>'}})
+        router.push({name:'article', params:{article_id:article_id, content: article_content}})
       },
 
       async fetch_articles(){

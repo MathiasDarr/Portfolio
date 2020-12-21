@@ -64,7 +64,23 @@ Resources:
             Path: /articles
             Method: put
 
-
+  ArticleDetailFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: ArticleDetailFunction
+      CodeUri: handlers/article_detail/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: Articles
+      Events:
+        ProductsQuery:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref ArticlesApi
+            Path: /articles/detail/{article_id}/{article_date}
+            Method: get
 
 
 Outputs:

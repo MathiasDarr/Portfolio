@@ -20,7 +20,7 @@ Resources:
     Properties:
       StageName: Prod
       Name: ArticlesApi
-      DefinitionUri: s3://dakobed-serverless-apis/decee72d15244e7a5ca511ea38048fe9
+      DefinitionUri: s3://dakobed-serverless-apis/777882f2814f0d0402f65ea1c7618b5e
   ArticlesScanFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -57,6 +57,24 @@ Resources:
               Ref: ArticlesApi
             Path: /articles
             Method: put
+  ArticleDetailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ArticleDetailFunction
+      CodeUri: s3://dakobed-serverless-apis/c22176a89896c8a3e10a1c49f21a52f6
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: Articles
+      Events:
+        ProductsQuery:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: ArticlesApi
+            Path: /articles/detail/{article_id}/{article_date}
+            Method: get
 Outputs:
   ArticlesApi:
     Value:
