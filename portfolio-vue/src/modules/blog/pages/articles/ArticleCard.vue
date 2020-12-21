@@ -11,19 +11,12 @@
         </v-flex>
         <v-flex md3>
           <v-card-subtitle>
-            <b> {{ category }} </b>
+            <b> {{ article_date }} </b>
           </v-card-subtitle>
         </v-flex>
         
       </v-layout>
 
-      <v-layout>
-        <v-flex md9>
-          <v-card-title>
-            {{ article_date }}
-          </v-card-title>
-        </v-flex>
-      </v-layout>
 
       <v-divider></v-divider>
       <v-card-text>

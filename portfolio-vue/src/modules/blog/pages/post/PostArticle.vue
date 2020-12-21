@@ -3,15 +3,12 @@
     <v-layout>
   
       <v-flex md12>
-        
-
       <v-container>
       
         <v-row>
           <v-col cols="12" sm="8">
         
           <h1> Post Article </h1>
-
           </v-col>
 
 
@@ -81,12 +78,16 @@
       
       <v-row>
         <v-col cols="12" sm="2">
-            <v-btn color="primary" @click="SaveArticle()">Save Article </v-btn>
+            <v-btn color="primary" @click="select_image()">Add Image </v-btn>
         </v-col>
 
         <v-col cols="12" sm="6">
             <v-btn color="primary" @click="await_post()">Post Article </v-btn>
         </v-col>
+      
+      
+      
+      
       </v-row>
 
     </v-container>
@@ -127,6 +128,17 @@ export default {
         async await_post(){
             this.PostArticle()
         },
+
+        async select_image(){
+            this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="https://dakobed.s3-us-west-1.amazonaws.com/bonanza.jpg" />'   )
+        },
+
+        async add_image(){
+
+        },
+
+
+
         LoadArticle(){
             
         }
