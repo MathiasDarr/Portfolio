@@ -13,7 +13,7 @@
           :key="item.article_id"
         >
 
-        <ArticleCard :title="item.title"/>
+        <ArticleCard :title="item.title" :article_date="item.article_date"/>
         {{item.article_id}}
           <v-list-item-icon>
             <v-icon v-text="item.icon"></v-icon>

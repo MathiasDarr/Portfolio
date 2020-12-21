@@ -5,16 +5,19 @@
       <Paragraph v-bind:title = "paragraph_title" v-bind:text = paragraph />
 
       <Paragraph v-bind:title = "paragraph2_title" v-bind:text = paragraph2 />
+
+      <Gist />
   </v-container>
 </template>
 
 <script>
 
 import Paragraph from '../../../../components/Paragraph'
-
+import Gist from '../../../../components/Gist'
 export default {
     components:{
-      Paragraph
+      Paragraph,
+      Gist
     },
     created(){
         console.log("HERLDF")
@@ -33,7 +36,13 @@ export default {
     
 
           paragraph2_title: "Relational Data Modeling",
-          paragraph2: `The pruimary concern in relation data modeling are the relationships between entities`
+          paragraph2: `The pruimary concern in relation data modeling are the relationships between entities.  Consider the case where we have an employee entity which has a foregin key relationship to a second entity, 'department`,
+
+          paragraph3_title : "Spring JPA",
+          paragraph3: `Spring Data JPA can be used to interface with a postgres table in the following manner.  In this tutorial we will set up a controller, a service, an entity class and a repository for querying the database.`,
+
+          paragraph_4_title: "Spring Kafka Binder"
+
 
         }
     }
