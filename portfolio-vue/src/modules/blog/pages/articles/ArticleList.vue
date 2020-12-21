@@ -2,6 +2,8 @@
  <v-container>
 
 
+   <ArticleDetail />
+
     <v-list shaped>
       <v-subheader>Articles</v-subheader>
       <v-list-item-group
@@ -32,6 +34,7 @@
 <script>
 /* eslint-disable */
 
+import ArticleDetail from './ArticleDetail'
 import ArticleCard from './ArticleCard'
 import axios from 'axios';
 import { mapGetters, mapActions } from "vuex";
@@ -42,14 +45,15 @@ export default {
       this.await_articles()
     },
     components:{
-        ArticleCard
+        ArticleCard,
+        ArticleDetail
     },
     methods:{
       ...mapActions(["setArticles"]),
 
       navigate(article_id){
         console.log(article_id)
-        router.push({name:'article', params:{article_id:article_id}})
+        router.push({name:'article', params:{article_id:article_id, content: '<h1> HELLO </h1>'}})
       },
 
       async fetch_articles(){

@@ -8,6 +8,8 @@
       <v-card-subtitle>
         {{ article_date }}
       </v-card-subtitle>
+      
+
     </v-card>
   </v-container>    
 </template>
