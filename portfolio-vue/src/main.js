@@ -19,6 +19,12 @@ Store.dispatch('system/initialize', null, { root: true })
 // Store.dispatch('system/initialize', null, { root: true })
 
 
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
+
+
+
 Vue.config.productionTip = false
 
 new Vue({

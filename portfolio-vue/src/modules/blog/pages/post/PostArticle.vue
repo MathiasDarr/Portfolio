@@ -107,6 +107,9 @@ import {Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap"
 import {Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, BulletList, ListItem, Code, Italic, Bold, Link, Strike, Image, Underline}from "tiptap-extensions"
 
 import axios from 'axios';
+import router from '../../../../services/router'
+
+
 
 export default {
     name: "PostArticle",
@@ -122,6 +125,7 @@ export default {
             console.log(this.title)
             // console.log(this.ediotr)
             console.log(this.editor.getHTML())
+            router.push({name:'blog'})
         },
         async await_post(){
             this.PostArticle()

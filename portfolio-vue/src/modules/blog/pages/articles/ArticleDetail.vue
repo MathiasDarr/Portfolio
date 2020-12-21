@@ -10,7 +10,7 @@
         </v-col>
 
         <v-col cols="12" sm="2">
-            <v-btn color="primary" @click="delete_article()">Delete Article </v-btn>
+            <v-btn color="primary" @click="await_delete_article()">Delete Article </v-btn>
         </v-col>
       </v-row>
 
@@ -36,7 +36,10 @@
 /* eslint-disable */
 
 import axios from 'axios';
+import router from '../../../../services/router'
 
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
 export default {
 
@@ -82,17 +85,20 @@ export default {
                 var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles/detail/'+ this.article_id + '/' + this.article_date
                 const response = await axios.delete(url)            
                 var response_articles = JSON.parse(response.data.body)
-                // this.setArticles(response_articles.articles)
-                console.log(response_articles.articles)
+                await delay(150)
+                router.push({name:'blog'})
             }catch(err){
                 console.log(err)
             }
         },
 
         async await_delete_article(){
-            await this.delete_article()
+            // in any component
+            this.$confirm("Are you sure you want to delete this article ?").then(() => {
+                //do something...
+                this.delete_article()
+            });
         },
-
 
     },
 
