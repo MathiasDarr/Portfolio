@@ -2,7 +2,7 @@
 
 if [[ -z $2 ]]
 then
-  stackname=blog-api-stack
+  stackname=portfolio-api-stack
 else
   stackname=$2
 fi

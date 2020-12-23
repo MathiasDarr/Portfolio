@@ -56,7 +56,7 @@ export default {
       async fetch_articles(){
             try{
                 //var url = window.__runtime_configuration.apiEndpoint + '/categories'
-                var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles'
+                var url ='https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
                 const response = await axios.get(url)            
                 var response_articles = JSON.parse(response.data.body)
                 // this.setArticles(response_articles.articles)
