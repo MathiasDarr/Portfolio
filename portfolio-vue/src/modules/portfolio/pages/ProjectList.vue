@@ -69,8 +69,6 @@ export default {
     }
   },
 
-
-
     data(){
         return {
 
@@ -84,10 +82,6 @@ export default {
           {title: 'Analytics', icon: 'mdi-data-matrix', admins: [['Twitter NLP', 'mdi-twitter','/portfolio/analytics/twitternlp']], },
           
           ],
-
-
-
-
 
           admins: [
             ['Management', 'mdi-account-multiple-outline'],

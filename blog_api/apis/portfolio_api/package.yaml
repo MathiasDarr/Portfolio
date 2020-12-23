@@ -20,7 +20,7 @@ Resources:
     Properties:
       StageName: Prod
       Name: PortfolioApi
-      DefinitionUri: s3://dakobed-serverless-apis/8fbb24745ae97c72dd821b4fcb63fc6b
+      DefinitionUri: s3://dakobed-serverless-apis/7ee259238ebb6c8be01914ad8a54cb18
   PortfolioDetailFunction:
     Type: AWS::Serverless::Function
     Properties:

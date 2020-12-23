@@ -59,15 +59,16 @@ export default {
       async fetch_article_detail(){
             try{
                 //var url = window.__runtime_configuration.apiEndpoint + '/categories'
-                var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles/detail/'+ this.article_id + '/' + this.article_date
+                var url ='https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles/detail/'+ this.article_id + '/' + this.article_date
                 const response = await axios.get(url)            
                 var response_article_detail = JSON.parse(response.data.body)
+                // console.log(response)
                 // this.setArticles(response_articles.articles)
                 this.content = response_article_detail.article.content
                 this.article_title = response_article_detail.article.title
   
 
-                // this.article = response_articles.article
+                this.article = response_articles.article
             }catch(err){
                 console.log(err)
             }

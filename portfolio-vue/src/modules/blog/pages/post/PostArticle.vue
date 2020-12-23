@@ -104,7 +104,7 @@ export default {
     },
     methods:{
         async PostArticle(){
-            var url = 'https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles'
+            var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
             console.log("CATEGORY " + this.category)
             const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
             // console.log(this.ediotr)
@@ -184,7 +184,7 @@ export default {
 
 
 
-            categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data'],
+            categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data', 'Data Pipelines'],
             category:'',
             image_url:'https://dakobed.s3-us-west-1.amazonaws.com/bonanza.jpg',
             image_url2:'https://dakobed.s3-us-west-1.amazonaws.com/chiwawa.jpg',
@@ -215,7 +215,9 @@ export default {
             ],
             content: `
 
+            <h3> Project Description </h3>
             <p>
+            
 
             In this project I scrape stream flow & snow pack data from the USDA & insert records into DynamoDB.  Each day, the USDA measures
                 the stream flow & snowpack, and it's level relative to the median for 120 locations within Washington state.  I use an airflow scheduled
@@ -223,17 +225,25 @@ export default {
                 is made available through an API (implemented & deployed as Spring Boot application running on ECS Fargate as well a serverless API using
                 AWS API Gateway * lambda) with routes for querying the data for specific locations over a range of dates.
             </p>
+            <h3> Washington State Snowpack</h3>
 
             <p>
             Washington state experienced several summers recently of wildfires where smoke filled the sky throughout the state.  I became interested
             in the state of the snowpack & it's impact on agriculture and the threat of wildfires.  The drought year of 2015 was of particular interest to me.
 
+            <img src="https://dakobed.s3-us-west-1.amazonaws.com/snotel.png">  />
+
             </p>
+
+            <h3> Data Analysis </h3>
+
             <p>
               To analyze the data, I queried DynamoDB & saved the data to json files for each location & each year, then implmented functions that created
               a PySpark dataframe from a selection of locations & years.  As an example of the data, I include a screenshot of the Spark Dataframe showing data for Lyman 
               Lake in 2015 in early June.  What these numbers show is a staggering lake of snowpack (which I recall because I was there in late June)
             </p>
+
+          <h3> Data Query API </h3>
 
             <p>
               I expose this data to be queried by location through a serverless API with a lambda function making a query to DynamoDB.  The API is defined using
@@ -241,9 +251,10 @@ export default {
               as SELECT * FROM snotel_table WHERE location = 'Lyman Lake' seemed inefficient.  It seemed as though a noSQL database would be far more efficient for supporting
               a query by the primary/hash key (location ID) & a range/sort key (date of measurement)    
             </p>
-    
 
-            <img src="https://dakobed.s3-us-west-1.amazonaws.com/bonanza.jpg" />
+            <h3> Data returned from API plotted with D3JS </h3>
+            
+            <img src="https://dakobed.s3-us-west-1.amazonaws.com/snotel_data.png">  />
             `  
             })
         }
