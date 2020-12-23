@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card height="300" width="1200">
+    <v-card height="300" width="1300">
       
       <v-layout>
         <v-flex md9>

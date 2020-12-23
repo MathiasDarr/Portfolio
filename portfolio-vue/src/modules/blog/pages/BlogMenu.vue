@@ -10,7 +10,7 @@
         <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
-            <h4> Blog Topics </h4>
+            <!-- <h4> Blog Topics </h4> -->
           </v-list-item-title>
           <v-list-item-subtitle>
             
@@ -42,10 +42,7 @@
 
 
       </v-list-group>
-      <v-list-item>
-        
-        <v-btn color="primary" @click="navigate_to_route_name('post_article')"> Post New Article </v-btn>
-        </v-list-item>
+
       
     </v-list>
     
@@ -82,10 +79,11 @@ export default {
 
     data(){
         return {
-          pipeline_projects: [['Management', 'mdi-account-multiple-outline'], ['Settings', 'mdi-cog-outline'],], 
-          categories: [{title:'Data Pipelines', icon: 'mdi-database-arrow-down-outline', admins: [['USDA Snowpack Pipeline', 'mdi-snowflake', '/portfolio/snotel'], ['Twitter Streaming Pipeline', 'mdi-twitter', '/portfolio/twitter/pipeline'],], },
-          {title:'Serverless Applications',  icon: 'mdi-lambda', admins: [['Serverless ECommerce ', 'mdi-cart',  '/portfolio/serverless/ecommerce'], ['Serverless Upload API', 'mdi-cloud-upload-outline', '/portfolio/serverless/upload'], ['Serverless Data Processing ', 'mdi-database-export-outline', '/portfolio/serverless/data-processing']], }
-          ],
+
+          categories:[]
+          // categories: [{title:'Data Pipelines', icon: 'mdi-database-arrow-down-outline', admins: [['USDA Snowpack Pipeline', 'mdi-snowflake', '/portfolio/snotel'], ['Twitter Streaming Pipeline', 'mdi-twitter', '/portfolio/twitter/pipeline'],], },
+          // {title:'Serverless Applications',  icon: 'mdi-lambda', admins: [['Serverless ECommerce ', 'mdi-cart',  '/portfolio/serverless/ecommerce'], ['Serverless Upload API', 'mdi-cloud-upload-outline', '/portfolio/serverless/upload'], ['Serverless Data Processing ', 'mdi-database-export-outline', '/portfolio/serverless/data-processing']], }
+          // ],
 
         }
     }
