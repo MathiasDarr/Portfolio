@@ -23,6 +23,15 @@
       
       </v-toolbar-items>
       
+      <v-toolbar-items class = "hidden-xs-only">
+        <v-btn  v-for="item in authItems" :key="item.title" @click="navigate_to_name_route(item.name)" class ="grey--text" >
+          <v-icon left >
+          </v-icon>
+          {{item.title}}
+        </v-btn>
+      
+      </v-toolbar-items>
+
       <v-spacer></v-spacer>
       </v-toolbar>
     </nav>
@@ -76,7 +85,9 @@ export default {
 
         router.push(route)
       }
-          
+    },
+    navigate_to_name_route(route){
+      router.push({name:route})
     }
   },
 
@@ -87,7 +98,10 @@ export default {
           {title:'Landing', route:'/', name:'landing', module_: null }, 
           {title: 'Blog', route: '/blog', name:'blog', module_:blog},
           {title:'Portfolio', route:'/portfolio', name:'portfolio', module_: portfolio },
-
+        ],
+        authItems:[
+          {title:'Register', route:'/register', name:'register'}, 
+          {title:'Login', route:'/login', name:'login'}, 
         ],
 
         color: 'primary',
