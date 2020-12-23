@@ -83,7 +83,7 @@ export default {
       async delete_article(){
             try{
                 //var url = window.__runtime_configuration.apiEndpoint + '/categories'
-                var url ='https://2qlgw486nb.execute-api.us-west-2.amazonaws.com/Prod/articles/detail/'+ this.article_id + '/' + this.article_date
+                var url ='https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles/detail/'+ this.article_id + '/' + this.article_date
                 const response = await axios.delete(url)            
                 var response_articles = JSON.parse(response.data.body)
                 await delay(150)
