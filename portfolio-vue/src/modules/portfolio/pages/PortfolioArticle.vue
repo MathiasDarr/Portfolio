@@ -35,7 +35,6 @@ export default {
           paragraph_title: "Apache Cassandra Data Modeling",
           paragraph: `Data modeling in Cassandra is very differant than data modeling relationally.`,
     
-
           paragraph2_title: "Relational Data Modeling",
           paragraph2: `The pruimary concern in relation data modeling are the relationships between entities.  Consider the case where we have an employee entity which has a foregin key relationship to a second entity, 'department`,
 

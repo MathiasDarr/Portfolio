@@ -5,7 +5,7 @@ import Home from '../pages/Home.vue'
 import Contact from '../pages/Contact.vue'
 import FAQ from '../pages/FAQ.vue'
 import Landing from '../pages/Landing'
-
+import Index from '../pages/Index'
 
 import AbstractArticle from '../../../components/AbstractArticle'
 
