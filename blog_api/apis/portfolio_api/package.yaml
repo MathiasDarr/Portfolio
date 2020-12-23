@@ -15,107 +15,17 @@ Globals:
   Function:
     Timeout: 3
 Resources:
-  ArticlesApi:
+  PortfolioApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: Prod
-      Name: ArticlesApi
-      DefinitionUri: s3://dakobed-serverless-apis/b0f046eec2fed8a68afdc12f25b09e43
-  ArticlesScanFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: ArticlesScanFunction
-      CodeUri: s3://dakobed-serverless-apis/ba2e4c44237eea7b42649299db0fe42f
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      Policies:
-      - DynamoDBReadPolicy:
-          TableName: Articles
-      Events:
-        ProductsQuery:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: ArticlesApi
-            Path: /articles
-            Method: get
-  PostArticleFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: PostArticleFunction
-      CodeUri: s3://dakobed-serverless-apis/d7270b09b733d6812677c6a859297120
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: Articles
-      Events:
-        ProductsQuery:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: ArticlesApi
-            Path: /articles
-            Method: put
-  ArticleDetailFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: ArticleDetailFunction
-      CodeUri: s3://dakobed-serverless-apis/c22176a89896c8a3e10a1c49f21a52f6
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      Policies:
-      - DynamoDBReadPolicy:
-          TableName: Articles
-      Events:
-        ProductsQuery:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: ArticlesApi
-            Path: /articles/detail/{article_id}/{article_date}
-            Method: get
-  ArticleUpdateFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: ArticleUpdateFunction
-      CodeUri: s3://dakobed-serverless-apis/4f3845afa2e80209971c11cdb3406cb7
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      Policies:
-      - DynamoDBReadPolicy:
-          TableName: Articles
-      Events:
-        ProductsQuery:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: ArticlesApi
-            Path: /articles/detail/{article_id}/{article_date}
-            Method: put
-  DeleteArticleFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: DeleteArticleFunction
-      CodeUri: s3://dakobed-serverless-apis/2413c29828a8efc6387bad291cbd8ce5
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: Articles
-      Events:
-        DeleteArticle:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: ArticlesApi
-            Path: /articles/detail/{article_id}/{article_date}
-            Method: delete
+      Name: PortfolioApi
+      DefinitionUri: s3://dakobed-serverless-apis/3f32aabc84359bc2fd56d7259b9669e6
   PortfolioDetailFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: PortfolioDetailFunction
-      CodeUri: s3://dakobed-serverless-apis/f8215bad5b6101f5d24aeec2bdfd1b29
+      CodeUri: s3://dakobed-serverless-apis/d8898731be556e5a4223371242006898
       Handler: app.lambda_handler
       Runtime: python3.7
       Policies:
@@ -126,16 +36,16 @@ Resources:
           Type: Api
           Properties:
             RestApiId:
-              Ref: ArticlesApi
+              Ref: PortfolioApi
             Path: /portfolio/detail/{article_category}/{article_name}
             Method: get
 Outputs:
-  ArticlesApi:
+  PortfolioApi:
     Value:
-      Fn::Sub: https://${ArticlesApi}.execute-api.${AWS::Region}.amazonaws.com/Prod
+      Fn::Sub: https://${PortfolioApi}.execute-api.${AWS::Region}.amazonaws.com/Prod
     Export:
       Name:
         Fn::Join:
         - ':'
         - - Ref: AWS::StackName
-          - ArticlesApi
+          - PortfolioApi
