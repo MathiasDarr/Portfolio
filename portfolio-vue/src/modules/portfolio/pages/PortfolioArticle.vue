@@ -14,11 +14,10 @@
 <script>
 
 import Paragraph from '../../../../components/Paragraph'
-import VueGistEmbed from 'vue-gist-embed';
+
 export default {
     components:{
       Paragraph,
-      VueGistEmbed
     },
     created(){
         console.log("HERLDF")

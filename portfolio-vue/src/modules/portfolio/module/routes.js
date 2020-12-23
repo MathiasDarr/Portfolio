@@ -19,10 +19,15 @@ import NmtProject from '../pages/projects/deep-learning/nmt/NmtProject'
 
 import TwitterNlpProject from '../pages/projects/analytics/TwitterNLP/TwitterNlpProject'
 
+import ProjectDetail from '../pages/ProjectDetail'
 
 export default [
 	{ path: '', component: Portfolio },
 	{ path: '/portfolio', component: Portfolio },
+
+	// { path: '/portfolio/detail/:article_category/:article_name', component: ProjectDetail, name:'portfolio_detail', props:true },
+	{ path: '/portfolio/detail', component: ProjectDetail},
+
 
 	{ path: '/portfolio/snotel', component: SnotelProject },
 

@@ -36,7 +36,8 @@
 /* eslint-disable */
 
 import axios from 'axios';
-import router from '../../../../services/router'
+// import router from '../../../../services/router'
+import router from '../../../services/router'
 
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -48,9 +49,7 @@ export default {
 
     created(){
 
-        this.article_id = this.$route.params.article_id
-
-        this.fetch_article_detail()
+        console.log("HDFDF")
     },
 
 

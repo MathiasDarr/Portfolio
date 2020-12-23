@@ -51,7 +51,7 @@
 </template>
 
 <script>
-
+/* eslint-disable */
 import router from '../../../services/router'
 
 
@@ -62,10 +62,10 @@ export default {
 
   methods:{
     navigate(route){
-      if(route != this.$route.path){
-        router.push(route)
-      }
-          
+      // if(route != this.$route.path){
+      //   router.push(route)
+      // }
+
     }
   },
 
