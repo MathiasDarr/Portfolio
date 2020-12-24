@@ -12,7 +12,7 @@
             <v-btn color="primary" @click="add_image()">Add Image </v-btn>
           </v-list-item> -->
           <v-list-item>
-              <v-btn color="primary" @click="select_image()">Select Image </v-btn>
+              <v-btn color="primary" @click="$emit('clickEvent', 'dfd')">Select Image </v-btn>
           </v-list-item>
           <v-list-item>
             <v-btn color="primary" @click="await_post()">Post Article </v-btn>    

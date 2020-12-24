@@ -18,7 +18,7 @@
             <EditorComponent />
           </v-flex>
           <v-flex md3>
-            <PostSidebar />
+            <PostSidebar @clickEvent="getClickEvent"/>
               <!-- <EditorComponent /> -->
           </v-flex>
         </v-layout>
@@ -108,7 +108,14 @@ export default {
 
         onFileChange(){
           this.file = this.$refs.file.files[0]          
+        },
+
+        getClickEvent(data_object){
+            console.log("I AM GETTING EMITTED FROM CHILD " + data_object) 
         }
+
+
+
 
     },
 
