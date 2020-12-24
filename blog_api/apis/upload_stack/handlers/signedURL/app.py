@@ -14,7 +14,7 @@ def create_presigned_post(bucket_name, object_name, fields=None, conditions=None
         response = s3_client.generate_presigned_post(bucket_name,
                                                      object_name,
                                                      Fields=fields,
-                                                     Conditions=conditions,
+                                                     Conditions={'ACL':'public-read'},
                                                      ExpiresIn=expiration)
     except ClientError as e:
         logging.error(e)

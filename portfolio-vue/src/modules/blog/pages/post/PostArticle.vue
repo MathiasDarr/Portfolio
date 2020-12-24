@@ -10,11 +10,11 @@
               <h1> Post Article </h1>
             </v-col>
           
-            <v-col cols="12" sm="2">
+            <!-- <v-col cols="12" sm="2">
               <v-btn color="primary" @click="LoadArticle('post_article')">Load Article </v-btn>
-            </v-col>
+            </v-col> -->
 
-            <v-col cols="12" sm="2">
+            <v-col cols="12" sm="4">
                   <ImageUpload />
             </v-col>
 
@@ -145,27 +145,27 @@ export default {
             
         },
 
-        async fetch_presigned_url(file){
-            try{
-                var name = this.file.name
-                var url ='https://bpvjzngdjb.execute-api.us-west-2.amazonaws.com/Prod/signedURL'
-                var body = {userID:'dakobedbard@gmail.com', filename:name}
-                const response = await axios.post(url, body)
-                console.log(response.data.presigned)
-                var data = response.data.presigned 
-                let form = new FormData()
-                Object.keys(data.fields).forEach(key=>form.append(key, data.fields[key]))
-                form.append('file', this.file)
-                await fetch(data.url, {method:'POST', body: form})
+        // async fetch_presigned_url(file){
+        //     try{
+        //         var name = this.file.name
+        //         var url ='https://bpvjzngdjb.execute-api.us-west-2.amazonaws.com/Prod/signedURL'
+        //         var body = {userID:'dakobedbard@gmail.com', filename:name}
+        //         const response = await axios.post(url, body)
+        //         console.log(response.data.presigned)
+        //         var data = response.data.presigned 
+        //         let form = new FormData()
+        //         Object.keys(data.fields).forEach(key=>form.append(key, data.fields[key]))
+        //         form.append('file', this.file)
+        //         await fetch(data.url, {method:'POST', body: form})
 
-            }catch(err){
-                console.log(err)
-            }
-        },
+        //     }catch(err){
+        //         console.log(err)
+        //     }
+        // },
 
-        async upload_file(){
-            await this.fetch_presigned_url(file)
-        },
+        // async upload_file(){
+        //     await this.fetch_presigned_url(file)
+        // },
 
         submit(){
           

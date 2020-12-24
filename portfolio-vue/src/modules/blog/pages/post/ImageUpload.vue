@@ -39,17 +39,23 @@ export default {
         async fetch_presigned_url(file){
             try{
                 var name = this.file.name
-                var url ='https://bpvjzngdjb.execute-api.us-west-2.amazonaws.com/Prod/signedURL'
+                var presignedurl ='https:/bpvjzngdjb.execute-api.us-west-2.amazonaws.com/Prod/signedURL' 
+                var upload_verification_url ='https:/bpvjzngdjb.execute-api.us-west-2.amazonaws.com/Prod/upload/' 
+                
                 var body = {userID:'dakobedbard@gmail.com', filename:name}
-                const response = await axios.post(url, body)
-                console.log(response.data.presigned)
+                const response = await axios.post(presignedurl, body)
+
                 var data = response.data.presigned 
+                var key = data.fields.key
+                console.log(data)
+                console.log(data.url+key)
                 let form = new FormData()
                 Object.keys(data.fields).forEach(key=>form.append(key, data.fields[key]))
                 form.append('file', this.file)
                 let post_response = await fetch(data.url, {method:'POST', body: form})
                 if (post_response.ok) { // if HTTP-status is 200-299
-                    
+                    const verificaiton_response = await axios.post(upload_verification_url, {key:key})
+
                 } else {
                     alert("HTTP-Error: " + response.status);
                 }
@@ -75,6 +81,7 @@ export default {
     data(){
         return {
             file: '',
+
         }
     }
 }
