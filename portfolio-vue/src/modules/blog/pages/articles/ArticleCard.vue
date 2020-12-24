@@ -19,9 +19,22 @@
 
 
       <v-divider></v-divider>
+      <v-layout>
+        <v-flex md9>
+          <v-card-text>
+            <p v-html="article_preview"></p>
+          </v-card-text>  
+        </v-flex>
+        <v-flex md3>
+          <v-card-subtitle>
+            <v-img lazy-src="https://picsum.photos/id/11/10/6" src="https://picsum.photos/id/11/500/300"> </v-img>
+          </v-card-subtitle>
+        </v-flex>
+      </v-layout>
+<!-- 
       <v-card-text>
          <p v-html="article_preview"></p>
-      </v-card-text>      
+      </v-card-text>       -->
 
     </v-card>
   </v-container>    

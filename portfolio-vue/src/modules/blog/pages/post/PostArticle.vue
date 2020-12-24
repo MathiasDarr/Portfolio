@@ -3,16 +3,27 @@
     <v-layout>
   
       <v-flex md12>
-      <v-container>
+        <v-container>
       
-        <v-row>
-          <v-col cols="12" sm="8">
-      
-          <h1> Post Article </h1>
-          </v-col>
-          <v-col cols="12" sm="4"
-            >
+          <v-row>
+            <v-col cols="12" sm="8">
+              <h1> Post Article </h1>
+            </v-col>
+          
+            <v-col cols="12" sm="2">
               <v-btn color="primary" @click="LoadArticle('post_article')">Load Article </v-btn>
+            </v-col>
+
+            <v-col cols="12" sm="2">
+               <div class="container">
+            <div class="large-12 medium-12 small-12 cell">
+              <label>File
+                <input type="file" id="file" ref="file" v-on:change="onFileChange()"/>
+              </label>
+              
+            <v-btn small color="primary" v-on:click="submit()">Primary</v-btn>
+            </div>
+          </div>
             </v-col>
 
           </v-row>
@@ -94,7 +105,7 @@ import {Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, 
 
 import axios from 'axios';
 import router from '../../../../services/router'
-
+import { mapGetters, mapActions } from "vuex";
 
 
 export default {
@@ -102,7 +113,15 @@ export default {
     components:{
         EditorContent, EditorMenuBar, EditorMenuBubble
     },
+    computed:{
+      ...mapGetters(["getIdToken"]),
+    },
     methods:{
+
+        async chooseMainImage(){},
+        async uploadImage(){
+
+        },
         async PostArticle(){
             var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
             console.log("CATEGORY " + this.category)
@@ -129,19 +148,50 @@ export default {
 
         LoadArticle(){
             
+        },
+
+        async fetch_presigned_url(file){
+            try{
+                var name = this.file.name
+                var url ='https://37tvbfnth9.execute-api.us-west-2.amazonaws.com/Prod/signedURL'
+                var body = {userID:'dakobedbard@gmail.com', filename:name}
+                const response = await axios.post(url, body)
+                console.log(response.data.presigned)
+                var data = response.data.presigned 
+                let form = new FormData()
+                Object.keys(data.fields).forEach(key=>form.append(key, data.fields[key]))
+                form.append('file', this.file)
+                await fetch(data.url, {method:'POST', body: form})
+
+            }catch(err){
+                console.log(err)
+            }
+        },
+
+        async upload_file(){
+            await this.fetch_presigned_url(file)
+        },
+
+        submit(){
+          
+          this.upload_file()
+        },
+
+        onFileChange(){
+          this.file = this.$refs.file.files[0]          
         }
+
     },
 
     data(){
         return {
 
-
+            file: '',
             snotel_content: `
 
             <h3> Project Description </h3>
             <p>
-            
-
+          
             In this project I scrape stream flow & snow pack data from the USDA & insert records into DynamoDB.  Each day, the USDA measures
                 the stream flow & snowpack, and it's level relative to the median for 120 locations within Washington state.  I use an airflow scheduled
                 task to scrape this data every day, and have backfilled the database to allow a user to query the data to perform analysis.  The data 
@@ -226,7 +276,7 @@ export default {
             `,
 
             music_project: `
-            <h2> Project Description </h2>
+            <h3> Project Description </h3>
 
 
             In this project I attempt to perform automatic music transcription, the process of taking raw audio of a musician playing and instrumentand outputting guitar tab or piano sheet music depending on the instrument.  This problem falls under the subfield of data science known as MIR (Music Information Retrieval). As an musician I am frequently faced with wanting to know how a particular piece of music is played.  This often occurs when I watch people perform covers of songs I want to learn on Youtube.  Woulden't it be great if I could get a transcription of what they are playing?

@@ -1,0 +1,135 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Dakobed Rest API Service
+Parameters:
+  QueueName:
+    Type: String
+    Default: LibrosaTransformsQueue
+  BucketName:
+    Type: String
+    Default: dakobed-sqs-transform-bucket
+Resources:
+  UploadApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: UploadApi
+      StageName: Prod
+      DefinitionUri: s3://dakobed-serverless-apis/d303d9ef95d6419af485613526063d0c
+  PresignedPostUploadFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 10
+      FunctionName: PresignedPostUploadFunction
+      Policies:
+      - S3CrudPolicy:
+          BucketName:
+            Ref: BucketName
+      - SQSSendMessagePolicy:
+          QueueName: InitiateTransformsQueue
+      - AWSLambdaBasicExecutionRole
+      - DynamoDBCrudPolicy:
+          TableName: UserUploads
+      CodeUri: s3://dakobed-serverless-apis/1230fb8a58ecc85b4c765ca4512b8e0b
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Environment:
+        Variables:
+          UploadBucket:
+            Ref: BucketName
+      Events:
+        UploadApi:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: UploadApi
+            Path: /signedURL
+            Method: POST
+  ConfigLambdaPermission:
+    Type: AWS::Lambda::Permission
+    DependsOn:
+    - UploadApi
+    - PresignedPostUploadFunction
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: PresignedPostUploadFunction
+      Principal: apigateway.amazonaws.com
+  S3UploadBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Ref: BucketName
+      NotificationConfiguration:
+        QueueConfigurations:
+        - Event: s3:ObjectCreated:Post
+          Queue:
+            Fn::GetAtt:
+            - TransformQueue
+            - Arn
+      CorsConfiguration:
+        CorsRules:
+        - AllowedHeaders:
+          - '*'
+          AllowedMethods:
+          - GET
+          - PUT
+          - HEAD
+          - POST
+          AllowedOrigins:
+          - '*'
+  TransformQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName:
+        Ref: QueueName
+  SQSQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    DependsOn: TransformQueue
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS: '*'
+          Action: SQS:SendMessage
+          Resource: '*'
+          Condition:
+            ArnLike:
+              aws:SourceArn:
+                Fn::Sub: arn:aws:s3:::${BucketName}
+      Queues:
+      - Ref: TransformQueue
+Outputs:
+  UploadApi:
+    Description: API Gateway endpoint URL for Prod stage upload API
+    Value:
+      Fn::Sub: https://${UploadApi}.execute-api.${AWS::Region}.amazonaws.com/Prod
+    Export:
+      Name:
+        Fn::Join:
+        - ':'
+        - - Ref: AWS::StackName
+          - UploadApi
+  S3UploadBucket:
+    Description: API Gateway endpoint URL for Prod stage upload API
+    Value:
+      Ref: BucketName
+    Export:
+      Name:
+        Fn::Join:
+        - ':'
+        - - Ref: AWS::StackName
+          - S3UploadBucket
+  UploadBucketARN:
+    Description: API Gateway endpoint URL for Prod stage upload API
+    Value:
+      Fn::GetAtt:
+      - S3UploadBucket
+      - Arn
+    Export:
+      Name:
+        Fn::Join:
+        - ':'
+        - - Ref: AWS::StackName
+          - upload-bucket-arn
