@@ -6,7 +6,7 @@
         <v-container>
       
           <v-row>
-            <v-col cols="12" sm="8">
+            <v-col cols="12" sm="6">
               <h1> Post Article </h1>
             </v-col>
           
@@ -14,7 +14,7 @@
               <v-btn color="primary" @click="LoadArticle('post_article')">Load Article </v-btn>
             </v-col> -->
 
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="6">
                   <ImageUpload />
             </v-col>
 

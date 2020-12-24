@@ -2,15 +2,25 @@
     <v-container>
         <v-card>
         <div class="container">
-                <div class="large-12 medium-12 small-12 cell">
-                  <label>File
+            <div class="large-12 medium-12 small-12 cell">
+            
                 <input type="file" id="file" ref="file" v-on:change="onFileChange()"/>
-              </label>
+            
               
-              <v-btn small color="primary" v-on:click="submit()">Upload File</v-btn>
+              <v-btn small color="primary" v-on:click="submit()">Upload Thumbnail</v-btn>
             </div>
         </div>
+        <div class ="container">
+            <div v-if="uploaded_file_url != ''">
+                
+                <v-img :src="uploaded_file_url"> </v-img>
+                fuck
+            </div>
+            <div v-else>
+                fdf 
+            </div>
 
+        </div>
 
         </v-card>
 
@@ -55,7 +65,7 @@ export default {
                 let post_response = await fetch(data.url, {method:'POST', body: form})
                 if (post_response.ok) { // if HTTP-status is 200-299
                     const verificaiton_response = await axios.post(upload_verification_url, {key:key})
-
+                    this.uploaded_file_url = data.url + key
                 } else {
                     alert("HTTP-Error: " + response.status);
                 }
@@ -81,7 +91,7 @@ export default {
     data(){
         return {
             file: '',
-
+            uploaded_file_url: ''
         }
     }
 }
