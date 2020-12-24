@@ -2,9 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Dakobed Rest API Service
 Parameters:
-  QueueName:
-    Type: String
-    Default: LibrosaTransformsQueue
   BucketName:
     Type: String
     Default: dakobed-sqs-transform-bucket
@@ -14,7 +11,7 @@ Resources:
     Properties:
       Name: UploadApi
       StageName: Prod
-      DefinitionUri: s3://dakobed-serverless-apis/d303d9ef95d6419af485613526063d0c
+      DefinitionUri: s3://dakobed-serverless-apis/6e336f40ded4903c0f8b38ff2b2739df
   PresignedPostUploadFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -24,12 +21,10 @@ Resources:
       - S3CrudPolicy:
           BucketName:
             Ref: BucketName
-      - SQSSendMessagePolicy:
-          QueueName: InitiateTransformsQueue
       - AWSLambdaBasicExecutionRole
       - DynamoDBCrudPolicy:
           TableName: UserUploads
-      CodeUri: s3://dakobed-serverless-apis/1230fb8a58ecc85b4c765ca4512b8e0b
+      CodeUri: s3://dakobed-serverless-apis/9b2b070225c12959fc392cf1bf221ed0
       Handler: app.lambda_handler
       Runtime: python3.7
       Environment:
@@ -59,13 +54,6 @@ Resources:
     Properties:
       BucketName:
         Ref: BucketName
-      NotificationConfiguration:
-        QueueConfigurations:
-        - Event: s3:ObjectCreated:Post
-          Queue:
-            Fn::GetAtt:
-            - TransformQueue
-            - Arn
       CorsConfiguration:
         CorsRules:
         - AllowedHeaders:
@@ -77,29 +65,43 @@ Resources:
           - POST
           AllowedOrigins:
           - '*'
-  TransformQueue:
-    Type: AWS::SQS::Queue
+  ProcessUploadFunction:
+    Type: AWS::Serverless::Function
     Properties:
-      QueueName:
-        Ref: QueueName
-  SQSQueuePolicy:
-    Type: AWS::SQS::QueuePolicy
-    DependsOn: TransformQueue
+      Timeout: 10
+      FunctionName: ProcessUploadFunction
+      Policies:
+      - S3CrudPolicy:
+          BucketName:
+            Ref: BucketName
+      - AWSLambdaBasicExecutionRole
+      - DynamoDBCrudPolicy:
+          TableName: UserUploads
+      CodeUri: s3://dakobed-serverless-apis/25595c94dd227b9b17a7867807cfc983
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Environment:
+        Variables:
+          UploadBucket:
+            Ref: BucketName
+      Events:
+        UploadApi:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: UploadApi
+            Path: /upload
+            Method: put
+  ProcessFunctionLambdaPermission:
+    Type: AWS::Lambda::Permission
+    DependsOn:
+    - UploadApi
+    - ProcessUploadFunction
     Properties:
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Principal:
-            AWS: '*'
-          Action: SQS:SendMessage
-          Resource: '*'
-          Condition:
-            ArnLike:
-              aws:SourceArn:
-                Fn::Sub: arn:aws:s3:::${BucketName}
-      Queues:
-      - Ref: TransformQueue
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Ref: ProcessUploadFunction
+      Principal: apigateway.amazonaws.com
 Outputs:
   UploadApi:
     Description: API Gateway endpoint URL for Prod stage upload API

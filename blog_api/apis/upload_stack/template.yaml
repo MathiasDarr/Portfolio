@@ -3,9 +3,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: Dakobed Rest API Service
 
 Parameters:
-  QueueName:
-    Type: String
-    Default: LibrosaTransformsQueue
   BucketName:
     Type: String
     Default: dakobed-sqs-transform-bucket
@@ -26,8 +23,6 @@ Resources:
       Policies:
         - S3CrudPolicy:
             BucketName: !Ref BucketName
-        - SQSSendMessagePolicy:
-            QueueName: InitiateTransformsQueue
         - AWSLambdaBasicExecutionRole
         - DynamoDBCrudPolicy:
             TableName: UserUploads
@@ -59,10 +54,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: !Ref BucketName
-      NotificationConfiguration:
-        QueueConfigurations:
-          - Event: s3:ObjectCreated:Post
-            Queue: !GetAtt TransformQueue.Arn
+
       CorsConfiguration:
         CorsRules:
         - AllowedHeaders:
@@ -75,28 +67,43 @@ Resources:
           AllowedOrigins:
             - "*"
 
-  TransformQueue:
-    Type: AWS::SQS::Queue
+  ProcessUploadFunction:
+    Type: AWS::Serverless::Function
     Properties:
-      QueueName: !Ref QueueName
+      Timeout: 10
+      FunctionName: ProcessUploadFunction
+      Policies:
+        - S3CrudPolicy:
+            BucketName: !Ref BucketName
+        - AWSLambdaBasicExecutionRole
+        - DynamoDBCrudPolicy:
+            TableName: UserUploads
+      CodeUri: handlers/processUpload
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Environment:
+        Variables:
+          UploadBucket: !Ref BucketName
+      Events:
+        UploadApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref UploadApi
+            Path: /upload
+            Method: put
 
-  SQSQueuePolicy:
-    Type: AWS::SQS::QueuePolicy
-    DependsOn: TransformQueue
+
+  ProcessFunctionLambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    DependsOn:
+    - UploadApi
+    - ProcessUploadFunction
     Properties:
-      PolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              AWS: "*"
-            Action: SQS:SendMessage
-            Resource: "*"
-            Condition:
-              ArnLike:
-                aws:SourceArn: !Sub 'arn:aws:s3:::${BucketName}'
-      Queues:
-        - !Ref TransformQueue
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ProcessUploadFunction
+      Principal: apigateway.amazonaws.com
+
+
 
 Outputs:
   UploadApi:

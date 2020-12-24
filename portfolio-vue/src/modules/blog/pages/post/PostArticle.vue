@@ -15,15 +15,7 @@
             </v-col>
 
             <v-col cols="12" sm="2">
-               <div class="container">
-            <div class="large-12 medium-12 small-12 cell">
-              <label>File
-                <input type="file" id="file" ref="file" v-on:change="onFileChange()"/>
-              </label>
-              
-            <v-btn small color="primary" v-on:click="submit()">Primary</v-btn>
-            </div>
-          </div>
+                  <ImageUpload />
             </v-col>
 
           </v-row>
@@ -106,12 +98,15 @@ import {Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, 
 import axios from 'axios';
 import router from '../../../../services/router'
 import { mapGetters, mapActions } from "vuex";
-
+import ImageUpload from './ImageUpload'
 
 export default {
     name: "PostArticle",
     components:{
-        EditorContent, EditorMenuBar, EditorMenuBubble
+        EditorContent, 
+        EditorMenuBar, 
+        EditorMenuBubble, 
+        ImageUpload
     },
     computed:{
       ...mapGetters(["getIdToken"]),
@@ -153,7 +148,7 @@ export default {
         async fetch_presigned_url(file){
             try{
                 var name = this.file.name
-                var url ='https://37tvbfnth9.execute-api.us-west-2.amazonaws.com/Prod/signedURL'
+                var url ='https://bpvjzngdjb.execute-api.us-west-2.amazonaws.com/Prod/signedURL'
                 var body = {userID:'dakobedbard@gmail.com', filename:name}
                 const response = await axios.post(url, body)
                 console.log(response.data.presigned)
@@ -310,8 +305,6 @@ export default {
             content: `
             <p>Dear Hiring Manager</p><p>I am writing to you about my interest in the engineering position that I saw advertised on your website.&nbsp;</p><p>I am a software/data/cloud engineer located in the Seattle area looking for new oppertunities.&nbsp;</p><p>My most recent position was a QA engineer for QualityLogic contracted through Ultimate Software to&nbsp; write pytests and java tests to test API endpoints for a human resources software product.&nbsp; The tests that I wrote ran in a CI/CD environment.</p><p>I spent a year as a&nbsp; software developer at EigenVector Research developing a MatLab data analysis toolbox used by chemical engineers to analyze spectra.&nbsp; While at EigenVector, I developed a tool using angular to plot and monitor time series data that was being received from an instrument measuring chemical spectra. &nbsp; I also developed several file importers for different types of spectral data formats, wrote documentation, and provided customer support.</p><p>Since last being employed I have focused on my portfolio and developing my skills.&nbsp; I now have an AWS certification, and my github contributions grid is a patchwork quilt of dark green squares (though somewhat less so since I moved my less polished work to a different github account).&nbsp; Since having been declined for a role I had really wanted (for what in my mind was lack of scripting experience), I have made it a point to improve my bash skills, as well as awk, sed and regular expressions.&nbsp;</p><p>The technologies that I feel most confident in are Python, Java, Linux, Spring Boot, DynamoDB, AWS, CloudFormation, Boto3, Docker &amp; Vue JS.&nbsp; The technologies that I have experience with but am interested in getting more experience with in a professional environment are Spark, Kafka &amp; Airflow.</p><p>With a solid understanding of computer science fundamentals, modern machine learning techniques, knowledge of cloud application development, a strong passion for learning and the ability to write clean well tested and documented code, I am a strong candidate for this position.&nbsp;&nbsp;&nbsp;&nbsp;</p>
             
-
-
             `,
 
             title: '',
