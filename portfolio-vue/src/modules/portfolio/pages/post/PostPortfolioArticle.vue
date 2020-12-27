@@ -76,7 +76,7 @@ import {Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, 
 
 import EditorComponent from './EditorComponent'
 
-import axios from 'axios';
+
 import router from '../../../../services/router'
 import { mapGetters, mapActions } from "vuex";
 
@@ -134,7 +134,8 @@ export default {
 
         onClickButton(value){
           console.log(value)
-          this.$emit('post_article',{'article_category':this.category, 'article_name':this.title})
+          console.log(this.category)
+          this.$emit('post_article',{'article_category': this.category, 'article_name':this.title})
         }
 
 

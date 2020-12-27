@@ -30,6 +30,8 @@ import {Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap"
 
 import {Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, BulletList, ListItem, Code, Italic, Bold, Link, Strike, Image, Underline}from "tiptap-extensions"
 
+import axios from 'axios';
+import router from '../../../../services/router'
 
 export default {
     components:{
@@ -38,18 +40,22 @@ export default {
         EditorMenuBubble, 
     },
     methods:{
-        // async PostArticle(data_object){
-        //     var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
-        //     console.log("CATEGORY " + this.category)
-        //     const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
-        //     // console.log(this.ediotr)
-        //     router.push({name:'blog'})
-        // },
+        async PostArticle(name, category){
+            var url = 'https://kiyaefg4z8.execute-api.us-west-2.amazonaws.com/Prod/portfolio'
+            
+            console.log("CATEGORY " + category)
+            // console.log("DATA OBJECT" + data_object.article_cateogry)
+            const res = await axios.put(url, { article_name: name, article_category:category,content:this.editor.getHTML() });
+            // console.log(this.ediotr)
+            router.push({name:'portfolio'})
+        },
 
 
         async await_post(data_object){
+          // console.log("I get called with" + data_object.article_name )            // this.PostArticle()
+          // console.log("I GET CALLED WITH  " + data_object.article_category)
+          await this.PostArticle(data_object.article_name, data_object.article_category)
 
-          console.log("I get called with" + data_object.article_name )            // this.PostArticle()
         },
 
 
@@ -101,48 +107,7 @@ export default {
               Raw Audio Signal
             </h3>
 
-            <h3>
-              Spectogram showing energy located in frequency bins over time intervals 
-            </h3>
-            <img src="https://dakobed-style.s3-us-west-2.amazonaws.com/screenshot.png" width="740" height="350">
-            
-            
-            <h2> Methods </h2>
-            
-            I attempt to reproduce the neural network archticture described by Manuel Minguez Carretero in his thesis. He proposes several neural network architectures for solving this problem, which he trained on the MusicNet database, an MIR dataset of piano recordings and sheet music.  In this project I instead train models using the GuitarSet & the Maestro datasets for performing guitar and piano transcription.
-            
-            <h3>
-              Network Architecture
-            </h3>
-            <img src="https://dakobed-style.s3-us-west-2.amazonaws.com/cnn.png" width="560" height="320">
-            
-            <h3>
-              Data Preprocessing
-
-            </h3>
-
-            <p>
-            In order to normalize the data, the mean value (for each frequency bin of the spectogram) taken over all of the training data must be calculated.
-            Since the data is too large to fit into memory, I implemented an algorithm known as Welford's algorithm, an iterative algorithm which calculates the running mean of a dataset such that not all of the data must be loaded into memory at once.
-
-            </p>
-            
-            <h3>
-              Training the neural network
-            </h3>
-            
-            <p>
-            The transforms and processed annotation numpy arrays are saved to S3 from where they are downloaded to an EC2 GPU instance.  The data is fed into a Keras generator (fit generator API) for training the neural network.  
-
-            </p>
-
-            <h3>
-              Results
-            </h3>
-            <p>
-            As of right now, the neural network was unable to make proper predictions..  I'm not entirely sure where I've gone wrong.
-            </p>
-
+  
             
             `  
             })

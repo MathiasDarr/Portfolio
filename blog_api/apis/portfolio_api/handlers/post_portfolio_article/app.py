@@ -55,12 +55,12 @@ def lambda_handler(event, context):
 
     content = event['body']['content']
 
-    article = {'article_category': article_category, 'content': content, 'article_name':article_name, 'preview':content[:450]}
+    portfolio_article = {'article_category': article_category, 'content': content, 'article_name':article_name, 'preview':content[:450]}
 
-    article_id = insert_order(article)
+    insert_order(portfolio_article)
 
     response = {"statusCode": 200, "body": json.dumps({
-        "article": article_id
+        "article": "success"
     }), 'headers': {"Access-Control-Allow-Origin": "*"}}
     return response
 

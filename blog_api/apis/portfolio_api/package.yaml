@@ -20,7 +20,7 @@ Resources:
     Properties:
       StageName: Prod
       Name: PortfolioApi
-      DefinitionUri: s3://dakobed-serverless-apis/96f268095096eb14e7cb0672cbe8485c
+      DefinitionUri: s3://dakobed-serverless-apis/0589834bc0ee3d4cbe3be8d62d28160c
   PortfolioDetailFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -43,7 +43,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: PostPortfolioFunction
-      CodeUri: s3://dakobed-serverless-apis/e98c4082984960a9cb9bb22c9332f2f8
+      CodeUri: s3://dakobed-serverless-apis/47261664bf08ee810e991a46c7abf3ca
       Handler: app.lambda_handler
       Runtime: python3.7
       Policies:

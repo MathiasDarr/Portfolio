@@ -25,7 +25,7 @@ import PostPortfolioArticle from '../pages/post/PostPortfolioArticle'
 
 export default [
 	{ path: '', component: Portfolio },
-	{ path: '/portfolio', component: Portfolio },
+	{ path: '/portfolio', component: Portfolio , name:'portfolio'},
 
 	// { path: '/portfolio/detail/:article_category/:article_name', component: ProjectDetail, name:'portfolio_detail', props:true },
 	{ path: '/portfolio/detail', component: ProjectDetail},
