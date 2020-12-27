@@ -45,23 +45,23 @@ Resources:
             Path: /portfolio/detail/{article_category}/{article_name}
             Method: get
 
-#  PostPortfolioFunction:
-#    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-#    Properties:
-#      FunctionName: PostPortfolioFunction
-#      CodeUri: handlers/portfolio_post/
-#      Handler: app.lambda_handler
-#      Runtime: python3.7
-#      Policies:
-#        - DynamoDBCrudPolicy:
-#            TableName: PortfolioArticles
-#      Events:
-#        ProductsQuery:
-#          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-#          Properties:
-#            RestApiId: !Ref PortfolioApi
-#            Path: /portfolio
-#            Method: put
+  PostPortfolioFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: PostPortfolioFunction
+      CodeUri: handlers/post_portfolio_article/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: PortfolioArticles
+      Events:
+        ProductsQuery:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref PortfolioApi
+            Path: /portfolio
+            Method: put
 
 #  PortfolioPostFunction:
 #    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction

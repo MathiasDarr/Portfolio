@@ -13,24 +13,19 @@ if dynamo_endpoint == 'cloud':
 else:
     dynamo_resource = boto3.resource('dynamodb', endpoint_url=dynamo_endpoint)
 
-TABLE_NAME = 'Articles'
+TABLE_NAME = 'PortfolioArticles'
 table = dynamo_resource.Table(TABLE_NAME)
 
 
 def insert_order(article):
-    article_id = str(uuid.uuid4())
 
     table.put_item(
         Item={
-            'article_id': article_id,
-            'title': article['title'],
-            'category': article['category'],
-            'content': article['content'],
-            'preview': article['preview'],
-            'article_date': article['article_date']
+            'article_category': article['article_category'],
+            'article_name': article['article_name'],
+            'content': article['content']
         }
     )
-    return article_id
 
 
 def lambda_handler(event, context):
@@ -55,11 +50,12 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    title = event['body']['title']
-    category = event['body']['category']
+    article_category = event['body']['article_category']
+    article_name = event['body']['article_name']
+
     content = event['body']['content']
-    article_date = event['body']['article_date']
-    article = {'title': title, 'category': category, 'content': content, 'article_date': article_date, 'preview':content[:450]}
+
+    article = {'article_category': article_category, 'content': content, 'article_name':article_name, 'preview':content[:450]}
 
     article_id = insert_order(article)
 
