@@ -11,11 +11,11 @@
           <!-- <v-list-item>
             <v-btn color="primary" @click="add_image()">Add Image </v-btn>
           </v-list-item> -->
-          <v-list-item>
+          <!-- <v-list-item>
               <v-btn color="primary" @click="$emit('clickEvent', 'dfd')">Select Image </v-btn>
-          </v-list-item>
+          </v-list-item> -->
           <v-list-item>
-            <v-btn color="primary" @click="$emit('postEvent')">Post Article </v-btn>    
+            <v-btn color="primary" @click="onClickPostArticle()">Post Article </v-btn>    
           </v-list-item>
       </v-list>
 
@@ -47,6 +47,10 @@ export default {
                 this.add_image(text)
             });
         },
+
+        onClickPostArticle(event){
+          this.$emit('postEvent', {first:'data'})
+        }
 
     },
     

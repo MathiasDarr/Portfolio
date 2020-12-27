@@ -18,7 +18,7 @@
             <EditorComponent />
           </v-flex>
           <v-flex md3>
-            <PostSidebar @postEvent="await_post" @clickEvent="getClickEvent"/>
+            <PostSidebar @postEvent="onClickButton"/>
               <!-- <EditorComponent /> -->
           </v-flex>
         </v-layout>
@@ -111,7 +111,13 @@ export default {
         },
 
         getClickEvent(data_object){
-            console.log("I AM GETTING EMITTED FROM CHILD " + data_object) 
+            console.log("I AM GETTING EMITTED FROM CHILD " + data_object)
+            // this.$broadcast('await_post', data_object);
+            // this.$refsgetEditorContentHtml
+        },
+
+        onClickButton(value){
+          console.log(value)
         }
 
 
@@ -123,7 +129,7 @@ export default {
         return {
 
             file: '',
-                  
+            data_object:Object,
             image_url:'https://dakobed.s3-us-west-1.amazonaws.com/bonanza.jpg',
             image_url2:'https://dakobed.s3-us-west-1.amazonaws.com/chiwawa.jpg',
             content: `

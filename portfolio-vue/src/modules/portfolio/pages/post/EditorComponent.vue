@@ -51,6 +51,21 @@ export default {
         EditorMenuBubble, 
     },
     methods:{
+        async PostArticle(data_object){
+            var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
+            console.log("CATEGORY " + this.category)
+            const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
+            // console.log(this.ediotr)
+            router.push({name:'blog'})
+        },
+
+        
+        async await_post(data_object){
+
+          console.log("I get called with" + data_object )            // this.PostArticle()
+        },
+
+
         getEditorContentHtml(){
             return this.editor.getHTML()
         }
@@ -94,8 +109,6 @@ export default {
               Raw Audio Signal
             </h3>
 
-
-
             <h3>
               Spectogram showing energy located in frequency bins over time intervals 
             </h3>
@@ -129,7 +142,6 @@ export default {
             <p>
             The transforms and processed annotation numpy arrays are saved to S3 from where they are downloaded to an EC2 GPU instance.  The data is fed into a Keras generator (fit generator API) for training the neural network.  
 
-   
             </p>
 
             <h3>
