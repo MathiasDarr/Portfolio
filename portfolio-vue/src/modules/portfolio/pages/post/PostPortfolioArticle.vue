@@ -12,6 +12,22 @@
           
           </v-row>
         </v-container>
+        <v-card>
+            <v-form>
+              <v-container fluid>
+                <v-row>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Article Title" value="" v-model="title"></v-text-field>
+                    </v-col>
+                  <v-col class="d-flex" cols="12" offset="2" sm="3">
+                    <v-select :items="categories" label="Article Category" v-model="category"></v-select>
+                  </v-col>
+                </v-row>
+              </v-container>  
+          </v-form>
+        </v-card>
+
+
         
         <v-layout>
           <v-flex md9>
@@ -118,7 +134,7 @@ export default {
 
         onClickButton(value){
           console.log(value)
-          this.$emit('post_article')
+          this.$emit('post_article',{'article_category':this.category, 'article_name':this.title})
         }
 
 
@@ -133,12 +149,10 @@ export default {
             data_object:Object,
             image_url:'https://dakobed.s3-us-west-1.amazonaws.com/bonanza.jpg',
             image_url2:'https://dakobed.s3-us-west-1.amazonaws.com/chiwawa.jpg',
-            content: `
-            <p>Dear Hiring Manager</p><p>I am writing to you about my interest in the engineering position that I saw advertised on your website.&nbsp;</p><p>I am a software/data/cloud engineer located in the Seattle area looking for new oppertunities.&nbsp;</p><p>My most recent position was a QA engineer for QualityLogic contracted through Ultimate Software to&nbsp; write pytests and java tests to test API endpoints for a human resources software product.&nbsp; The tests that I wrote ran in a CI/CD environment.</p><p>I spent a year as a&nbsp; software developer at EigenVector Research developing a MatLab data analysis toolbox used by chemical engineers to analyze spectra.&nbsp; While at EigenVector, I developed a tool using angular to plot and monitor time series data that was being received from an instrument measuring chemical spectra. &nbsp; I also developed several file importers for different types of spectral data formats, wrote documentation, and provided customer support.</p><p>Since last being employed I have focused on my portfolio and developing my skills.&nbsp; I now have an AWS certification, and my github contributions grid is a patchwork quilt of dark green squares (though somewhat less so since I moved my less polished work to a different github account).&nbsp; Since having been declined for a role I had really wanted (for what in my mind was lack of scripting experience), I have made it a point to improve my bash skills, as well as awk, sed and regular expressions.&nbsp;</p><p>The technologies that I feel most confident in are Python, Java, Linux, Spring Boot, DynamoDB, AWS, CloudFormation, Boto3, Docker &amp; Vue JS.&nbsp; The technologies that I have experience with but am interested in getting more experience with in a professional environment are Spark, Kafka &amp; Airflow.</p><p>With a solid understanding of computer science fundamentals, modern machine learning techniques, knowledge of cloud application development, a strong passion for learning and the ability to write clean well tested and documented code, I am a strong candidate for this position.&nbsp;&nbsp;&nbsp;&nbsp;</p>
-            
-            `,
 
-            title: '',
+            categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data', 'Data Pipelines'],
+            category:'',
+            title: 'First Article',
 
         }
     },

@@ -1,20 +1,7 @@
 <template>
   <div>
 
-        <v-card flat>
-            <v-form>
-              <v-container fluid>
-                <v-row>
-                  <v-col cols="12" sm="6">
-                    <v-text-field label="Article Title" value="" v-model="title"></v-text-field>
-                    </v-col>
-                  <v-col class="d-flex" cols="12" offset="2" sm="3">
-                    <v-select :items="categories" label="Article Category" v-model="category"></v-select>
-                  </v-col>
-                </v-row>
-              </v-container>  
-          </v-form>
-          
+        <v-card flat>          
           <div class = "editor">
 
             <v-card > 
@@ -51,26 +38,26 @@ export default {
         EditorMenuBubble, 
     },
     methods:{
-        async PostArticle(data_object){
-            var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
-            console.log("CATEGORY " + this.category)
-            const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
-            // console.log(this.ediotr)
-            router.push({name:'blog'})
-        },
+        // async PostArticle(data_object){
+        //     var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
+        //     console.log("CATEGORY " + this.category)
+        //     const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
+        //     // console.log(this.ediotr)
+        //     router.push({name:'blog'})
+        // },
 
 
         async await_post(data_object){
 
-          console.log("I get called with" + data_object )            // this.PostArticle()
+          console.log("I get called with" + data_object.article_name )            // this.PostArticle()
         },
 
 
         getEditorContentHtml(){
             return this.editor.getHTML()
         },
-        post_content(){
-          console.log('dfdf')
+        post_content(content_object){
+          this.await_post(content_object)
         }
 
     },
@@ -85,9 +72,6 @@ export default {
 
     data(){
         return {
-            categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data', 'Data Pipelines'],
-            category:'',
-            title: '',
             editor: new Editor({
             extensions:[
                 new Blockquote(),
