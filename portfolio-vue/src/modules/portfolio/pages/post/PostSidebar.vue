@@ -8,9 +8,9 @@
         <v-layout>
     <v-container>
       <v-list>
-          <!-- <v-list-item>
+          <v-list-item>
             <v-btn color="primary" @click="add_image()">Add Image </v-btn>
-          </v-list-item> -->
+          </v-list-item>
           <!-- <v-list-item>
               <v-btn color="primary" @click="$emit('clickEvent', 'dfd')">Select Image </v-btn>
           </v-list-item> -->
@@ -29,17 +29,21 @@
 /* eslint-disable */
 
 
-import ImageUpload from './ImageUpload'
+import ImageUpload from '../../../../components/shared/ImageUpload'
+import { mapGetters, mapActions } from "vuex";
+
 export default {
     components:{
         ImageUpload
     },
     methods:{
-        // async add_image(image_url, height, width){
-        //     // this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="' + this.image_url+ '" width=""500" height ="=2000" />'   )
-        //     this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="' + this.image_url2+ '" width=""500" height ="=2000" />'   )
-
-        // },
+      ...mapActions(["setImageUploadUrl"]),
+        async add_image(image_url){
+            this.setImageUploadUrl(image_url)
+            // this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="' + this.image_url+ '" width=""500" height ="=2000" />'   )
+            // this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="' + this.image_url2+ '" width=""500" height ="=2000" />'   )
+            // this.#emit('addImage', )
+        },
 
         async select_image(){
             this.$prompt("Select Image").then((text) => {

@@ -32,7 +32,7 @@ import {Blockquote, CodeBlock, HardBreak, Heading, HorizontalRule, OrderedList, 
 
 import axios from 'axios';
 import router from '../../../../services/router'
-
+import { mapGetters, mapActions } from "vuex";
 export default {
     components:{
         EditorContent, 
@@ -42,12 +42,12 @@ export default {
     methods:{
         async PostArticle(name, category){
             var url = 'https://kiyaefg4z8.execute-api.us-west-2.amazonaws.com/Prod/portfolio'
-            
-            console.log("CATEGORY " + category)
-            // console.log("DATA OBJECT" + data_object.article_cateogry)
-            const res = await axios.put(url, { article_name: name, article_category:category,content:this.editor.getHTML() });
-            // console.log(this.ediotr)
-            router.push({name:'portfolio'})
+            console.log("THE IMAGE URL IS "  + this.getImageUrl)            
+            // console.log("CATEGORY " + category)
+            // // console.log("DATA OBJECT" + data_object.article_cateogry)
+            // const res = await axios.put(url, { article_name: name, article_category:category,content:this.editor.getHTML() });
+            // // console.log(this.ediotr)
+            // router.push({name:'portfolio'})
         },
 
 
@@ -75,6 +75,9 @@ export default {
     mounted() {
         // this.bus.$on('submit', this.getEditorContentHtml)
     },  
+    computed:{
+      ...mapGetters(["getImageUrl"])
+    },
 
     data(){
         return {

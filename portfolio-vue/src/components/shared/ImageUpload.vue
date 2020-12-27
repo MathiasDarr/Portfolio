@@ -5,8 +5,6 @@
             <div class="large-12 medium-12 small-12 cell">
             
                 <input type="file" id="file" ref="file" v-on:change="onFileChange()"/>
-            
-              
               <v-btn small color="primary" v-on:click="submit()">Upload Thumbnail</v-btn>
             </div>
         </div>
@@ -45,6 +43,8 @@ export default {
     
     
     methods:{
+        ...mapActions(["setImageUploadUrl"]),
+
 
         async fetch_presigned_url(file){
             try{
@@ -66,6 +66,7 @@ export default {
                 if (post_response.ok) { // if HTTP-status is 200-299
                     const verificaiton_response = await axios.post(upload_verification_url, {key:key})
                     this.uploaded_file_url = data.url + key
+                    this.setImageUploadUrl(this.uploaded_file_url)
                 } else {
                     alert("HTTP-Error: " + response.status);
                 }
