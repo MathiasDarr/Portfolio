@@ -18,7 +18,7 @@
             <EditorComponent />
           </v-flex>
           <v-flex md3>
-            <PostSidebar @clickEvent="getClickEvent"/>
+            <PostSidebar @postEvent="await_post" @clickEvent="getClickEvent"/>
               <!-- <EditorComponent /> -->
           </v-flex>
         </v-layout>

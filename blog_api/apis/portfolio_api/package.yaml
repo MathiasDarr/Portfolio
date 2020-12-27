@@ -20,12 +20,12 @@ Resources:
     Properties:
       StageName: Prod
       Name: PortfolioApi
-      DefinitionUri: s3://dakobed-serverless-apis/7ee259238ebb6c8be01914ad8a54cb18
+      DefinitionUri: s3://dakobed-serverless-apis/63eaf4de3f10ef2d976249ccb2447cf5
   PortfolioDetailFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: PortfolioDetailFunction
-      CodeUri: s3://dakobed-serverless-apis/d8898731be556e5a4223371242006898
+      CodeUri: s3://dakobed-serverless-apis/dc71217f405b3b71ccdbcdbcb1e71e32
       Handler: app.lambda_handler
       Runtime: python3.7
       Policies:
@@ -39,24 +39,6 @@ Resources:
               Ref: PortfolioApi
             Path: /portfolio/detail/{article_category}/{article_name}
             Method: get
-  PostPortfolioFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: PostPortfolioFunction
-      CodeUri: s3://dakobed-serverless-apis/858ed28ed3a7813f3ae5764fb03c7bdd
-      Handler: app.lambda_handler
-      Runtime: python3.7
-      Policies:
-      - DynamoDBCrudPolicy:
-          TableName: PortfolioArticles
-      Events:
-        ProductsQuery:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: PortfolioApi
-            Path: /portfolio
-            Method: put
 Outputs:
   PortfolioApi:
     Value:

@@ -10,32 +10,28 @@ import os
 
 
 dynamo_endpoint = os.getenv('dynamo_endpoint')
-if dynamo_endpoint == 'cloud' or dynamo_endpoint =='':
-    dynamo = boto3.client('dynamodb')
-else:
-    dynamo = boto3.client('dynamodb',endpoint_url=dynamo_endpoint)
+# if dynamo_endpoint == 'cloud' or dynamo_endpoint =='':
+#     dynamodb = boto3.resource('dynamodb')
+# else:
+#     dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8000")#,endpoint_url=dynamo_endpoint)
 
-TABLE_NAME = 'PortfolioArticles'
+dynamodb = boto3.resource('dynamodb')
+TABLE_NAME = 'Articles'
+table = dynamodb.Table(TABLE_NAME)
 
-
-def get_article_detail(article_category, article_name):
-    response = dynamo.get_item(
-        TableName=TABLE_NAME,
+def delete_article(article_id, article_date):
+    response = table.delete_item(
         Key={
-            'article_category': {'S': article_category},
-            'article_name': {'S': article_name}
+            'article_id':  article_id,
+            'article_date': article_date
         }
     )
-    item = response['Item']
-    keys = list(item.keys())
-    article = {key: list(item[key].values())[0] for key in keys}
+    return response
 
-    return article
-
-
-# product_name = 'Heeled Boots'
-# vendor ="Blundstone"
-# response = get_product_detail(vendor, product_name)
+# article_id='9eefada5-e655-4410-9fb4-db62dcce243d'
+# article_date ='12-17-2020'
+#
+# delete_article(article_id, article_date)
 
 
 def lambda_handler(event, context):
@@ -57,21 +53,16 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    article_category = event['pathParameters']['article_category']
-    article_name = event['pathParameters']['article_name']
-
-
-    article_category = article_category.replace('%20',' ')
-    article_name = article_name.replace('%20',' ')
-    portfolio_article = get_article_detail(article_category, article_name)
+    article_id = event['pathParameters']['article_id']
+    article_date = event['pathParameters']['article_date']
+    # article_id ="1184eb13c-0b8e-475c-8c21-f331af51757b"
+    # article_date="12-20-2020"
+    response = delete_article(article_id, article_date)
 
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "article": portfolio_article,
+            "article": response,
             'headers': {"Access-Control-Allow-Origin": "*"}
         }),
     }
-
-
-

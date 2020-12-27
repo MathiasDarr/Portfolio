@@ -39,18 +39,18 @@ paths:
       tags:
         - "products"
       summary: "return all products from vendor"
-      operationId: "getProductsByVendor"
+      operationId: "getPortfolioById"
       produces:
         - "application/json"
       parameters:
-        - name: "article_id"
+        - name: "article_category"
           in: "path"
           description: "ID of vendor "
           required: true
           type: "integer"
           format: "int64"
 
-        - name: "article_date"
+        - name: "article_name"
           in: "path"
           description: "ID of vendor "
           required: true

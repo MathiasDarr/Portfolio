@@ -50,7 +50,15 @@ export default {
         EditorMenuBar, 
         EditorMenuBubble, 
     },
+    methods:{
+        getEditorContentHtml(){
+            return this.editor.getHTML()
+        }
+    },
 
+    mounted() {
+        this.bus.$on('submit', this.getEditorContentHtml)
+    },  
 
     data(){
         return {
