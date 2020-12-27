@@ -36,12 +36,17 @@ export default {
     components:{
         ImageUpload
     },
+    computed:{
+      ...mapGetters(["getImageUrl"])
+    },
     methods:{
       ...mapActions(["setImageUploadUrl"]),
         async add_image(image_url){
-            this.setImageUploadUrl(image_url)
-            // this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="' + this.image_url+ '" width=""500" height ="=2000" />'   )
-            // this.editor.setContent(this.editor.getHTML() + '<h1>FUCK</h1> <img src="' + this.image_url2+ '" width=""500" height ="=2000" />'   )
+
+            console.log(this.getImageUrl)
+            // this.setImageUploadUrl(image_url)
+            // console.log("THE IMAGE URL IN MENU IS " + image_url)
+            this.$emit('addImage', {image_url:'data'})
             // this.#emit('addImage', )
         },
 

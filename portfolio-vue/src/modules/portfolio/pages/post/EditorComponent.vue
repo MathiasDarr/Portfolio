@@ -64,12 +64,23 @@ export default {
         },
         post_content(content_object){
           this.await_post(content_object)
+        },
+        add_image_to_html(data){
+          console.log("DOWNSTREAM " + this.getImageUrl)
+          // console.log("THE IMAGE URL IS " + JSON.stringify(data))
+          this.editor.setContent(this.editor.getHTML() + '<img src="' + this.getImageUrl +  '"/>'   )
         }
+
+
+
+
+
 
     },
 
     created(){
       this.$parent.$on('post_article', this.post_content )
+      this.$parent.$on('add_image', this.add_image_to_html)
     },
 
     mounted() {

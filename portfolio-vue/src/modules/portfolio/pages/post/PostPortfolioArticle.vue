@@ -34,7 +34,7 @@
             <EditorComponent />
           </v-flex>
           <v-flex md3>
-            <PostSidebar @postEvent="onClickButton"/>
+            <PostSidebar @addImage="onAddimage" @postEvent="onClickButton"/>
               <!-- <EditorComponent /> -->
           </v-flex>
         </v-layout>
@@ -136,7 +136,13 @@ export default {
           console.log(value)
           console.log(this.category)
           this.$emit('post_article',{'article_category': this.category, 'article_name':this.title})
+        },
+
+        onAddimage(data){
+          console.log("THE DATA IS " + data)
+          this.$emit('add_image', data)
         }
+
 
 
 
