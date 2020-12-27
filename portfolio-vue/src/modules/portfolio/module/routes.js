@@ -21,6 +21,8 @@ import TwitterNlpProject from '../pages/projects/analytics/TwitterNLP/TwitterNlp
 
 import ProjectDetail from '../pages/ProjectDetail'
 
+import PostPortfolioArticle from '../pages/post/PostPortfolioArticle'
+
 export default [
 	{ path: '', component: Portfolio },
 	{ path: '/portfolio', component: Portfolio },
@@ -46,7 +48,9 @@ export default [
 	{path: '/portfolio/deep-learning/mir', component: MirProject},
 	{path: '/portfolio/deep-learning/nmt', component: NmtProject},
 
-	{path: '/portfolio/analytics/twitternlp', component: TwitterNlpProject}
+	{path: '/portfolio/analytics/twitternlp', component: TwitterNlpProject},
 
+
+	{path: '/portfolio/post', component: PostPortfolioArticle, name:'post_portfolio_article'}
 
 ]

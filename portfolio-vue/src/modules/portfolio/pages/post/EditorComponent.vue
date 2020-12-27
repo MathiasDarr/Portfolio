@@ -57,7 +57,7 @@ export default {
     },
 
     mounted() {
-
+        // this.bus.$on('submit', this.getEditorContentHtml)
     },  
 
     data(){
