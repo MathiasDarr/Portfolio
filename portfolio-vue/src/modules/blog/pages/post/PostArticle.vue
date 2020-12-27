@@ -13,12 +13,28 @@
           </v-row>
         </v-container>
         
+                <v-card>
+            <v-form>
+              <v-container fluid>
+                <v-row>
+                  <v-col cols="12" sm="6">
+                    <v-text-field label="Article Title" value="" v-model="title"></v-text-field>
+                    </v-col>
+                  <v-col class="d-flex" cols="12" offset="2" sm="3">
+                    <v-select :items="categories" label="Article Category" v-model="category"></v-select>
+                  </v-col>
+                </v-row>
+              </v-container>  
+          </v-form>
+        </v-card>
+
+
         <v-layout>
           <v-flex md9>
             <EditorComponent />
           </v-flex>
           <v-flex md3>
-            <PostSidebar  @clickEvent="getClickEvent"/>
+            <PostSidebar  @addImage="onAddimage" @postEvent="onClickButton"/>
               <!-- <EditorComponent />  @postEvent="await_post"-->
           </v-flex>
         </v-layout>
@@ -68,6 +84,11 @@ import PostSidebar from '../post/PostSidebar'
 
 
 export default {
+
+    categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data', 'Data Pipelines'],
+    category:'',
+    title: '',
+
     name: "PostArticle",
     components:{
         EditorContent, 
@@ -86,16 +107,7 @@ export default {
         async uploadImage(){
 
         },
-        async PostArticle(){
-            var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
-            console.log("CATEGORY " + this.category)
-            const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
-            // console.log(this.ediotr)
-            router.push({name:'blog'})
-        },
-        async await_post(){
-            this.PostArticle()
-        },
+
 
         LoadArticle(){
             
@@ -110,9 +122,24 @@ export default {
           this.file = this.$refs.file.files[0]          
         },
 
+
         getClickEvent(data_object){
-            console.log("I AM GETTING EMITTED FROM CHILD " + data_object) 
+            console.log("I AM GETTING EMITTED FROM CHILD " + data_object)
+            // this.$broadcast('await_post', data_object);
+            // this.$refsgetEditorContentHtml
+        },
+
+        onClickButton(value){
+          console.log(value)
+          console.log(this.category)
+          this.$emit('post_article',{'article_category': this.category, 'article_name':this.title})
+        },
+
+        onAddimage(data){
+          console.log("THE DATA IS " + data)
+          this.$emit('add_image', data)
         }
+
 
 
 
@@ -123,7 +150,9 @@ export default {
         return {
 
             file: '',
-                  
+            categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data', 'Data Pipelines'],
+            category:'',
+            title: 'First Blog Post Article',
             image_url:'https://dakobed.s3-us-west-1.amazonaws.com/bonanza.jpg',
             image_url2:'https://dakobed.s3-us-west-1.amazonaws.com/chiwawa.jpg',
             content: `

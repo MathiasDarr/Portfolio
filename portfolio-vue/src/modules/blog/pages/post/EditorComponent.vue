@@ -2,18 +2,6 @@
   <div>
 
         <v-card flat>
-            <v-form>
-              <v-container fluid>
-                <v-row>
-                  <v-col cols="12" sm="6">
-                    <v-text-field label="Article Title" value="" v-model="title"></v-text-field>
-                    </v-col>
-                  <v-col class="d-flex" cols="12" offset="2" sm="3">
-                    <v-select :items="categories" label="Article Category" v-model="category"></v-select>
-                  </v-col>
-                </v-row>
-              </v-container>  
-          </v-form>
           
           <div class = "editor">
 
@@ -51,9 +39,33 @@ export default {
         EditorMenuBubble, 
     },
     methods:{
+        async PostArticle(){
+            var url = 'https://wnhvjytp6c.execute-api.us-west-2.amazonaws.com/Prod/articles'
+            console.log("CATEGORY " + this.category)
+            const res = await axios.put(url, { title: this.title, category:this.category, article_date:'12-22-2020', content:this.editor.getHTML() });
+            // console.log(this.ediotr)
+            router.push({name:'blog'})
+        },
+        async await_post(){
+            this.PostArticle()
+        },
+
+
         getEditorContentHtml(){
             return this.editor.getHTML()
+        },
+        add_image_to_html(data){
+          console.log("DOWNSTREAM " + this.getImageUrl)
+          // console.log("THE IMAGE URL IS " + JSON.stringify(data))
+          this.editor.setContent(this.editor.getHTML() + '<img src="' + this.getImageUrl +  '"/>'   )
         }
+        
+        
+    },
+
+    created(){
+      this.$parent.$on('post_article', this.post_content )
+      this.$parent.$on('add_image', this.add_image_to_html)
     },
 
     mounted() {
@@ -62,9 +74,7 @@ export default {
 
     data(){
         return {
-            categories: ['Spark', 'Machine Learning', 'Serverless Application Model', 'Vue JS', 'Integration Testing', 'Spring Data', 'Data Pipelines'],
-            category:'',
-            title: '',
+        
             editor: new Editor({
             extensions:[
                 new Blockquote(),
@@ -87,57 +97,8 @@ export default {
             <h2> Project Description </h2>
 
 
-            In this project I attempt to perform automatic music transcription, the process of taking raw audio of a musician playing and instrumentand outputting guitar tab or piano sheet music depending on the instrument.  This problem falls under the subfield of data science known as MIR (Music Information Retrieval). As an musician I am frequently faced with wanting to know how a particular piece of music is played.  This often occurs when I watch people perform covers of songs I want to learn on Youtube.  Woulden't it be great if I could get a transcription of what they are playing?
+            In this project I attempt to perform automatic music transcription, the process of taking raw audio of a musician playing and instrumentand 
             
-
-            <h3>
-              Raw Audio Signal
-            </h3>
-
-
-
-            <h3>
-              Spectogram showing energy located in frequency bins over time intervals 
-            </h3>
-            <img src="https://dakobed-style.s3-us-west-2.amazonaws.com/screenshot.png" width="740" height="350">
-            
-            
-            <h2> Methods </h2>
-            
-            I attempt to reproduce the neural network archticture described by Manuel Minguez Carretero in his thesis. He proposes several neural network architectures for solving this problem, which he trained on the MusicNet database, an MIR dataset of piano recordings and sheet music.  In this project I instead train models using the GuitarSet & the Maestro datasets for performing guitar and piano transcription.
-            
-            <h3>
-              Network Architecture
-            </h3>
-            <img src="https://dakobed-style.s3-us-west-2.amazonaws.com/cnn.png" width="560" height="320">
-            
-            <h3>
-              Data Preprocessing
-
-            </h3>
-
-            <p>
-            In order to normalize the data, the mean value (for each frequency bin of the spectogram) taken over all of the training data must be calculated.
-            Since the data is too large to fit into memory, I implemented an algorithm known as Welford's algorithm, an iterative algorithm which calculates the running mean of a dataset such that not all of the data must be loaded into memory at once.
-
-            </p>
-            
-            <h3>
-              Training the neural network
-            </h3>
-            
-            <p>
-            The transforms and processed annotation numpy arrays are saved to S3 from where they are downloaded to an EC2 GPU instance.  The data is fed into a Keras generator (fit generator API) for training the neural network.  
-
-   
-            </p>
-
-            <h3>
-              Results
-            </h3>
-            <p>
-            As of right now, the neural network was unable to make proper predictions..  I'm not entirely sure where I've gone wrong.
-            </p>
 
             
             `  

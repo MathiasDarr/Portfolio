@@ -28,11 +28,16 @@
 <script>
 /* eslint-disable */
 
-import { mapGetters, mapActions } from "vuex";
+
 import ImageUpload from '../../../../components/shared/ImageUpload'
+import { mapGetters, mapActions } from "vuex";
+
 export default {
     components:{
         ImageUpload
+    },
+    computed:{
+      ...mapGetters(["getImageUrl"])
     },
     methods:{
       ...mapActions(["setImageUploadUrl"]),
@@ -56,6 +61,7 @@ export default {
           this.$emit('postEvent', {first:'data'})
           // this.$broadcast('responsePaginated', response.data);
         }
+
 
     },
     

@@ -70,12 +70,6 @@ export default {
           // console.log("THE IMAGE URL IS " + JSON.stringify(data))
           this.editor.setContent(this.editor.getHTML() + '<img src="' + this.getImageUrl +  '"/>'   )
         }
-
-
-
-
-
-
     },
 
     created(){
