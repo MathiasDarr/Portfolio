@@ -50,7 +50,9 @@ export default {
 
         onClickPostArticle(event){
           this.$emit('postEvent', {first:'data'})
+          // this.$broadcast('responsePaginated', response.data);
         }
+
 
     },
     

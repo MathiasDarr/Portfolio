@@ -59,7 +59,7 @@ export default {
             router.push({name:'blog'})
         },
 
-        
+
         async await_post(data_object){
 
           console.log("I get called with" + data_object )            // this.PostArticle()
@@ -68,7 +68,15 @@ export default {
 
         getEditorContentHtml(){
             return this.editor.getHTML()
+        },
+        post_content(){
+          console.log('dfdf')
         }
+
+    },
+
+    created(){
+      this.$parent.$on('post_article', this.post_content )
     },
 
     mounted() {

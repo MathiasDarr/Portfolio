@@ -118,6 +118,7 @@ export default {
 
         onClickButton(value){
           console.log(value)
+          this.$emit('post_article')
         }
 
 
