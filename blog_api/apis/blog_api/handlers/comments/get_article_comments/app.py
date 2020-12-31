@@ -19,8 +19,8 @@ def query_comments_by_article_id(article_id):
         KeyConditionExpression=Key('article_id').eq(article_id)
     )
     comments = comments['Items']
-
     return comments
+
 
 def lambda_handler(event, context):
 

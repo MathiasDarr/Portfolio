@@ -23,7 +23,7 @@ Resources:
     Properties:
       StageName: Prod
       Name: ArticlesApi
-      DefinitionUri: s3://dakobed-serverless-apis/7f0b5efbf4d287ecbbf369e3e2b28bdf
+      DefinitionUri: s3://dakobed-serverless-apis/ada0926eeafa461f983a2c3ebfa30b28
   ArticlesScanFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -118,7 +118,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: BlogCommentsFunction
-      CodeUri: s3://dakobed-serverless-apis/a422de01bbea84ab1658be03f51c6ea2
+      CodeUri: s3://dakobed-serverless-apis/f7481c5497530fe332a20ff470714af9
       Handler: app.lambda_handler
       Runtime: python3.7
       Environment:
@@ -138,6 +138,30 @@ Resources:
               Ref: ArticlesApi
             Path: /blog/comments/{article_id}
             Method: get
+  PostCommentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PostCommentFunction
+      CodeUri: s3://dakobed-serverless-apis/bb7675af965e91cc6ea1db724b4a9c2b
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Environment:
+        Variables:
+          dynamo_endpoint:
+            Ref: DynamoEndpoint
+          region:
+            Ref: Region
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName: Comments
+      Events:
+        VendorQuery:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: ArticlesApi
+            Path: /blog/comments
+            Method: post
 Outputs:
   ArticlesApi:
     Value:

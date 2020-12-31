@@ -64,7 +64,6 @@ def populate_articles_table():
             insert_article(row, table)
 
 
-
 def insert_comment(comment, table):
     return table.put_item(
         Item={
@@ -133,6 +132,5 @@ def populate_comments_table():
 
 if __name__ == '__main__':
     dynamodb = boto3.resource('dynamodb') #, endpoint_url="http://localhost:8000")
-
     # populate_articles_table()
     populate_comments_table()

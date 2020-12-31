@@ -147,6 +147,30 @@ Resources:
             Path: /blog/comments/{article_id}
             Method: get
 
+  PostCommentFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: PostCommentFunction
+      CodeUri: handlers/comments/post_comment/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Environment:
+        Variables:
+          dynamo_endpoint: !Ref DynamoEndpoint
+          region: !Ref Region
+
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: Comments
+      Events:
+        VendorQuery:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref ArticlesApi
+            Path: /blog/comments
+            Method: post
+
+
 
 
 Outputs:
