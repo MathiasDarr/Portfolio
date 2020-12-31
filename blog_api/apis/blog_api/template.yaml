@@ -7,6 +7,10 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 
 Parameters:
+  Region:
+    Type: String
+    Default: us-west-2
+
   DynamoEndpoint:
     Type: String
     Default: cloud
@@ -117,6 +121,31 @@ Resources:
             RestApiId: !Ref ArticlesApi
             Path: /articles/detail/{article_id}/{article_date}
             Method: delete
+
+
+  BlogCommentsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      FunctionName: BlogCommentsFunction
+      CodeUri: handlers/comments/get_article_comments/
+
+      Handler: app.lambda_handler
+      Runtime: python3.7
+      Environment:
+        Variables:
+          dynamo_endpoint: !Ref DynamoEndpoint
+          region: !Ref Region
+
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: Comments
+      Events:
+        VendorQuery:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            RestApiId: !Ref ArticlesApi
+            Path: /blog/comments/{article_id}
+            Method: get
 
 
 

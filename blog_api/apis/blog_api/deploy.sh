@@ -17,6 +17,7 @@ sam package \
   --output-template-file package.yaml
 
 
+
 if [[ $1 == 'aws' ]]
 then
 #  awslocal api create-rest-api --region ${REGION} --name ${API_NAME}
